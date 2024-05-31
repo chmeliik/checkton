@@ -17,10 +17,16 @@ inputs:
     description: Hash of latest commit in Pull Request
     required: false
     default: ${{ github.event.pull_request.head.sha }}
-  github-token:
-    description: GitHub TOKEN used to upload SARIF data
+  fail-on-findings:
+    description: >-
+      Fail when ShellCheck reports some findings? (May wish to set this to false if you're
+      going to upload the SARIF report anyway. GitHub takes care of the reporting.)
     required: false
-    default: ${{ github.token }}
+    default: true
+
+outputs:
+  sarif:
+    description: Path to the generated SARIF report.
 
 runs:
   using: docker
@@ -28,4 +34,4 @@ runs:
   env:
     BASE: ${{ inputs.pull-request-base }}
     HEAD: ${{ inputs.pull-request-head }}
-    GITHUB_TOKEN: ${{ inputs.github-token }}
+    CHECKTON_FAIL_ON_FINDINGS: ${{ inputs.fail-on-warnings }}
