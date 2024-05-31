@@ -11,4 +11,4 @@ RUN microdnf -y install \
 
 COPY src/ /opt/checkton/
 
-CMD ["/opt/checkton/differential-checkton.sh"]
+CMD ["/opt/checkton/action.sh"]
