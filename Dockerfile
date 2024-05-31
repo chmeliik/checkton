@@ -9,6 +9,6 @@ RUN microdnf -y install \
         python-unversioned-command-3.12.3-2.fc40 \
     && microdnf clean all
 
-COPY checkton.py differential-checkton.sh /opt/checkton/
+COPY src/ /opt/checkton/
 
 CMD ["/opt/checkton/differential-checkton.sh"]
