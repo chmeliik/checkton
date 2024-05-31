@@ -46,7 +46,31 @@ jobs:
 
 ## Inputs
 
+### `pull-request-base`
+
+Hash of the latest commit in the base branch.
+
+* default: `${{ github.event.pull_request.base.sha }}`
+
+### `pull-request-head`
+
+Hash of the latest commit in the Pull Request.
+
+* default: `${{ github.event.pull_request.head.sha }}`
+
+### `fail-on-findings`
+
+Fail when ShellCheck reports some findings? (May wish to set this to false if
+you're going to upload the SARIF report anyway. GitHub takes care of the
+reporting.)
+
+* default: `true`
+
 ## Outputs
+
+### `sarif`
+
+Path to the generated SARIF report.
 
 <!-- </automated> -->
 
