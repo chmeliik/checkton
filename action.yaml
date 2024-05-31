@@ -10,11 +10,11 @@ branding:
 inputs:
   # inspired by https://github.com/redhat-plumbers-in-action/differential-shellcheck/blob/main/action.yml
   pull-request-base:
-    description: Hash of top commit on base branch
+    description: Hash of the latest commit in the base branch.
     required: false
     default: ${{ github.event.pull_request.base.sha }}
   pull-request-head:
-    description: Hash of latest commit in Pull Request
+    description: Hash of the latest commit in the Pull Request.
     required: false
     default: ${{ github.event.pull_request.head.sha }}
   fail-on-findings:
