@@ -6,13 +6,19 @@ SCRIPTDIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 if [[ -n "${GITHUB_WORKSPACE:-}" ]]; then
     git config --global --add safe.directory "$GITHUB_WORKSPACE"
 fi
-diff=$("$SCRIPTDIR"/differential-checkton.sh | csgrep)
 
-if [[ -z "$diff" ]]; then
+diff=$("$SCRIPTDIR"/differential-checkton.sh)
+exitcode=0
+
+if [[ -z "$(csgrep <<< "$diff")" ]]; then
     echo "✅ No new shellcheck warnings, congrats! \\o/"
 else
     echo "❌ PR introduces new shellcheck warnings! /o\\"
     csgrep --embed-context 4 <<< "$diff"
+
+    if [[ "${CHECKTON_FAIL_ON_FINDINGS:-}" == "true" ]]; then
+        exitcode=1
+    fi
 fi
 
 shellcheck_version=$(shellcheck --version | awk '/version:/ { print $2 }')
@@ -26,6 +32,4 @@ csgrep \
 
 echo "sarif=.checkton.sarif" >> "${GITHUB_OUTPUT:-/dev/stdout}"
 
-if [[ "${CHECKTON_FAIL_ON_FINDINGS:-}" == "true" ]] && [[ -n "$diff" ]]; then
-    exit 1
-fi
+exit $exitcode
