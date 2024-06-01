@@ -12,38 +12,60 @@ checkton() {
 
 cleanup() {
     rm -rf "$WORKDIR" || true
-    git worktree remove "$WORKDIR/repo" || true
+    git worktree remove "$WORKDIR/repo" 2>/dev/null || true
 }
 
 WORKDIR=$(mktemp -d --tmpdir "checkton-workdir.XXXXXX")
 trap cleanup EXIT
 
-if ! git worktree add -d "$WORKDIR/repo" "$base" >/dev/null 2>"$WORKDIR/err"; then
-    cat "$WORKDIR/err" >&2
-    exit 1
-fi
-
-mapfile -t changed_yaml_files < <(
+files_to_check=$(
     {
-        git log --name-only --pretty=format: --diff-filter=d "${base}..${head}"
+        git log --name-status --pretty=format: --diff-filter=d "${base}..${head}"
         # handle uncommitted changes as well
-        git diff --name-only --diff-filter=d
+        git diff --name-status --diff-filter=d
     } | awk '/\.yaml$|.yml$/' | sort -u
 )
 
 {
     echo "Files to check:"
-    if [[ ${#changed_yaml_files[@]} -eq 0 ]]; then
+    if [[ -z "$files_to_check" ]]; then
         echo "  <none>"
         exit 0
     fi
-    printf "  %s\n" "${changed_yaml_files[@]}"
+    # shellcheck disable=SC2001
+    sed -e '/^$/d' -e 's/^/  /' <<< "$files_to_check"
 } >&2
+
+old_files=()
+new_files=()
+
+while read -r status name new_name; do
+    if [[ -n "$new_name" ]]; then
+        old_files+=("$name")
+        new_files+=("$new_name")
+    else
+        new_files+=("$name")
+        # status includes A => the file is new
+        if [[ ! "$status" == *A* ]]; then
+            old_files+=("$name")
+        fi
+    fi
+done <<< "$files_to_check"
 
 old_results=$WORKDIR/old.err
 new_results=$WORKDIR/new.err
 
-(cd "$WORKDIR/repo" && checkton "${changed_yaml_files[@]}" > "$old_results")
-checkton "${changed_yaml_files[@]}" > "$new_results"
+if [[ ${#old_files[@]} -gt 0 ]]; then
+    if ! git worktree add -d "$WORKDIR/repo" "$base" >/dev/null 2>"$WORKDIR/err"; then
+        printf "checking files at base ref: failed to create git worktree: %s\n" \
+            "$(cat "$WORKDIR/err")" >&2
+        exit 1
+    fi
+    (cd "$WORKDIR/repo" && checkton "${old_files[@]}" > "$old_results")
+else
+    touch "$old_results"
+fi
+
+checkton "${new_files[@]}" > "$new_results"
 
 csdiff "$old_results" "$new_results"
