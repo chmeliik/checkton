@@ -39,15 +39,19 @@ files_to_check=$(
 
 old_files=()
 new_files=()
+renames=""
 
 while read -r status name new_name; do
     if [[ -n "$new_name" ]]; then
         old_files+=("$name")
         new_files+=("$new_name")
+        if [[ "$status" != *C* || "${CHECKTON_TREAT_COPY_AS_RENAME:-}" == "true" ]]; then
+            renames+=$(jq -n -c --arg old "$name" --arg new "$new_name" '{($old): $new}')
+        fi
     else
         new_files+=("$name")
         # status includes A => the file is new
-        if [[ ! "$status" == *A* ]]; then
+        if [[ "$status" != *A* ]]; then
             old_files+=("$name")
         fi
     fi
@@ -68,5 +72,14 @@ else
 fi
 
 checkton "${new_files[@]}" > "$new_results"
+
+if [[ "$renames" != "" && "${CHECKTON_HANDLE_RENAMES:-true}" == "true" ]]; then
+    renames_json=$(jq -c -s 'reduce .[] as $kv ({}; . * $kv)' <<< "$renames")
+    renamed=$(
+        jq -c --argjson renames "$renames_json" '.comments[].file |= ($renames[.] // .)' \
+            < "$old_results"
+    )
+    printf "%s\n" "$renamed" > "$old_results"
+fi
 
 csdiff "$old_results" "$new_results"

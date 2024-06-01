@@ -8,6 +8,7 @@ mapfile -t updated_rpms < <(
         ShellCheck \
         csdiff \
         git \
+        jq \
         python-unversioned-command |
     awk '
         /Available packages/ { flag = 1; next }
