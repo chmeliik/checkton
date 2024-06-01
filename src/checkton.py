@@ -166,6 +166,8 @@ def _main(args: argparse.Namespace, context: contextlib.ExitStack) -> None:
         scriptdir=scriptdir_path,
     )
     script_files = scriptdir.write()
+    if not script_files:
+        return
 
     shellcheck = shutil.which("shellcheck")
     if not shellcheck:
