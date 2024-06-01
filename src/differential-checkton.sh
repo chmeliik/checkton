@@ -23,6 +23,7 @@ files_to_check=$(
         git log --name-status --pretty=format: --diff-filter=d "${base}..${head}"
         # handle uncommitted changes as well
         git diff --name-status --diff-filter=d
+        git diff --staged --name-status --diff-filter=d
     } | awk '/\.ya?ml$/' | sort -u
 )
 
