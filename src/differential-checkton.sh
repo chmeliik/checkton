@@ -23,7 +23,7 @@ files_to_check=$(
         git log --name-status --pretty=format: --diff-filter=d "${base}..${head}"
         # handle uncommitted changes as well
         git diff --name-status --diff-filter=d
-    } | awk '/\.yaml$|.yml$/' | sort -u
+    } | awk '/\.ya?ml$/' | sort -u
 )
 
 {
