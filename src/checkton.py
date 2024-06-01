@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from __future__ import annotations
+
 import argparse
 import contextlib
 import json
@@ -7,19 +9,17 @@ import shutil
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Literal, NamedTuple
+from typing import Literal, NamedTuple, TypedDict, assert_type
 
 
 class InlineScript(NamedTuple):
-    lineno: int
     lines: list[str]
+    line_offset: int
+    column_offset: int
 
     def gen_shellcheckable_file(self) -> str:
-        shebang, *rest = self.lines
-        lines = [shebang.lstrip()]
-        lines.extend("" for _ in range(self.lineno - 1))
-        lines.extend(rest)
-        return "\n".join(lines) + "\n"
+        left_aligned_lines = (line[self.column_offset :] for line in self.lines)
+        return "\n".join(left_aligned_lines) + "\n"
 
 
 def list_shell_scripts(yamlfile: Path) -> list[InlineScript]:
@@ -46,12 +46,16 @@ def list_shell_scripts(yamlfile: Path) -> list[InlineScript]:
                 shell_indent = curr_indent
                 if is_sh == "explicit":
                     initial_script_lines = [line]
-                    lineno = i + 1
+                    line_offset = i
                 else:
+                    indent = " " * curr_indent
                     # https://tekton.dev/docs/pipelines/tasks/#running-scripts-within-steps
-                    initial_script_lines = ["#!/bin/sh", f"{' ' * shell_indent}set -e", line]
-                    lineno = i - 1  # we're injecting two lines that weren't there
-                scripts.append(InlineScript(lineno, initial_script_lines))
+                    initial_script_lines = [f"{indent}#!/bin/sh", f"{indent}set -e", line]
+                    line_offset = i - 2  # we're injecting two lines that weren't there
+
+                scripts.append(
+                    InlineScript(initial_script_lines, line_offset, column_offset=curr_indent)
+                )
             elif shell_indent is not None and (not line or curr_indent >= shell_indent):
                 scripts[-1].lines.append(line)
             else:
@@ -61,6 +65,80 @@ def list_shell_scripts(yamlfile: Path) -> list[InlineScript]:
                 prev_nonempty_line = line
 
     return scripts
+
+
+class ShellCheckJSON(TypedDict):
+    comments: list[ShellCheckComment]
+
+
+class ShellCheckComment(TypedDict):
+    file: str
+    line: int
+    endLine: int
+    column: int
+    endColumn: int
+    level: str
+    code: int
+    message: str
+    fix: ShellCheckFix | None
+
+
+class ShellCheckFix(TypedDict):
+    replacements: list[ShellCheckReplacement]
+
+
+class ShellCheckReplacement(TypedDict):
+    line: int
+    endLine: int
+    column: int
+    endColumn: int
+    precedence: int
+    insertionPoint: str
+    replacement: str
+
+
+def update_shellcheck_json(
+    shellcheck_json: ShellCheckJSON,
+    scriptdir: ScriptDir,
+) -> None:
+    for item in shellcheck_json["comments"]:
+        filepath = Path(item["file"])
+        script = scriptdir.get_inline_script(filepath)
+
+        item["file"] = scriptdir.get_original_path(filepath).as_posix()
+        for obj in (item, *(fix["replacements"] if (fix := item["fix"]) else [])):
+            assert_type(obj, ShellCheckComment | ShellCheckReplacement)
+            for k in "line", "endLine":
+                obj[k] += script.line_offset
+            for k in "column", "endColumn":
+                obj[k] += script.column_offset
+
+
+class ScriptDir:
+    def __init__(self, scripts_by_file: dict[Path, list[InlineScript]], scriptdir: Path) -> None:
+        self._scripts_by_file = scripts_by_file
+        self._scriptdir = scriptdir
+
+    def write(self) -> list[Path]:
+        script_files = []
+
+        for yamfile, scripts in self._scripts_by_file.items():
+            scriptdir_for_file = self._scriptdir / yamfile
+            if scripts:
+                scriptdir_for_file.mkdir(parents=True, exist_ok=True)
+
+            for i, script in enumerate(scripts):
+                script_files.append(scriptdir_for_file / f"{i}.sh")
+                script_files[-1].write_text(script.gen_shellcheckable_file())
+
+        return script_files
+
+    def get_original_path(self, scriptfile: Path) -> Path:
+        return scriptfile.parent.relative_to(self._scriptdir)
+
+    def get_inline_script(self, scriptfile: Path) -> InlineScript:
+        original_path = self.get_original_path(scriptfile)
+        return self._scripts_by_file[original_path][int(scriptfile.stem)]
 
 
 def main() -> None:
@@ -75,23 +153,19 @@ def main() -> None:
 
 def _main(args: argparse.Namespace, context: contextlib.ExitStack) -> None:
     files: list[Path] = args.files
-    scriptdir: Path | None = args.scriptdir
+    scriptdir_path: Path | None = args.scriptdir
 
-    if not scriptdir:
+    if not scriptdir_path:
         tmpdir = tempfile.TemporaryDirectory(prefix="checkton-")
-        scriptdir = Path(context.enter_context(tmpdir))
+        scriptdir_path = Path(context.enter_context(tmpdir))
 
-    script_files = []
-
-    for yamfile in filter(Path.is_file, files):
-        scripts = list_shell_scripts(yamfile)
-        scriptdir_for_file = scriptdir / yamfile
-        if scripts:
-            scriptdir_for_file.mkdir(parents=True, exist_ok=True)
-
-        for i, script in enumerate(scripts):
-            script_files.append(scriptdir_for_file / f"{i}.sh")
-            script_files[-1].write_text(script.gen_shellcheckable_file())
+    scriptdir = ScriptDir(
+        scripts_by_file={
+            yamlfile: list_shell_scripts(yamlfile) for yamlfile in filter(Path.is_file, files)
+        },
+        scriptdir=scriptdir_path,
+    )
+    script_files = scriptdir.write()
 
     shellcheck = shutil.which("shellcheck")
     if not shellcheck:
@@ -106,11 +180,8 @@ def _main(args: argparse.Namespace, context: contextlib.ExitStack) -> None:
     if not 0 <= proc.returncode <= 2:
         exit(f"shellcheck exited with: {proc.returncode}")
 
-    shellcheck_json = json.loads(proc.stdout)
-
-    for item in shellcheck_json["comments"]:
-        filepath = Path(item["file"])
-        item["file"] = filepath.parent.relative_to(scriptdir).as_posix()
+    shellcheck_json: ShellCheckJSON = json.loads(proc.stdout)
+    update_shellcheck_json(shellcheck_json, scriptdir)
 
     print(json.dumps(shellcheck_json, separators=(",", ":")))
 
