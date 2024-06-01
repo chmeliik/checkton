@@ -16,8 +16,12 @@ cleanup() {
 }
 
 WORKDIR=$(mktemp -d --tmpdir "checkton-workdir.XXXXXX")
-git worktree add -d "$WORKDIR/repo" "$base" >/dev/null
 trap cleanup EXIT
+
+if ! git worktree add -d "$WORKDIR/repo" "$base" >/dev/null 2>"$WORKDIR/err"; then
+    cat "$WORKDIR/err" >&2
+    exit 1
+fi
 
 mapfile -t changed_yaml_files < <(
     {
@@ -28,7 +32,7 @@ mapfile -t changed_yaml_files < <(
 )
 
 {
-    echo "files to check:"
+    echo "Files to check:"
     if [[ ${#changed_yaml_files[@]} -eq 0 ]]; then
         echo "  <none>"
         exit 0

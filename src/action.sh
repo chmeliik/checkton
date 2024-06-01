@@ -11,9 +11,9 @@ diff=$("$SCRIPTDIR"/differential-checkton.sh)
 exitcode=0
 
 if [[ -z "$(csgrep <<< "$diff")" ]]; then
-    echo "✅ No new shellcheck warnings, congrats! \\o/"
+    echo "✅ No new ShellCheck warnings, congrats! \\o/"
 else
-    echo "❌ PR introduces new shellcheck warnings! /o\\"
+    echo "❌ PR introduces new ShellCheck warnings! /o\\"
     csgrep --embed-context 4 <<< "$diff"
 
     if [[ "${CHECKTON_FAIL_ON_FINDINGS:-}" == "true" ]]; then
