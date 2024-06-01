@@ -3,8 +3,8 @@ set -o errexit -o nounset -o pipefail
 
 SCRIPTDIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
-BASE=${BASE:-$(git rev-parse main)}
-HEAD=${HEAD:-$(git rev-parse HEAD)}
+base=${CHECKTON_DIFF_BASE:-$(git rev-parse main)}
+head=${CHECKTON_DIFF_HEAD:-$(git rev-parse HEAD)}
 
 checkton() {
     "${SCRIPTDIR}/checkton.py" "$@"
@@ -16,12 +16,12 @@ cleanup() {
 }
 
 WORKDIR=$(mktemp -d --tmpdir "checkton-workdir.XXXXXX")
-git worktree add -d "$WORKDIR/repo" "$BASE" >/dev/null
+git worktree add -d "$WORKDIR/repo" "$base" >/dev/null
 trap cleanup EXIT
 
 mapfile -t changed_yaml_files < <(
     {
-        git log --name-only --pretty=format: --diff-filter=d "${BASE}..${HEAD}"
+        git log --name-only --pretty=format: --diff-filter=d "${base}..${head}"
         # handle uncommitted changes as well
         git diff --name-only --diff-filter=d
     } | awk '/\.yaml$|.yml$/' | sort -u

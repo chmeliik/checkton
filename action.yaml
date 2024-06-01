@@ -32,6 +32,6 @@ runs:
   using: docker
   image: Dockerfile
   env:
-    BASE: ${{ inputs.pull-request-base }}
-    HEAD: ${{ inputs.pull-request-head }}
+    CHECKTON_DIFF_BASE: ${{ inputs.pull-request-base }}
+    CHECKTON_DIFF_HEAD: ${{ inputs.pull-request-head }}
     CHECKTON_FAIL_ON_FINDINGS: ${{ inputs.fail-on-warnings }}
