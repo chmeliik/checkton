@@ -42,12 +42,14 @@ assert_output_file() {
 
 @test "csgrep the results" {
     skip_unless_have_cmd csgrep
-    run csgrep --embed 4 < "$R/tektontask/shellcheck.json"
+    run checkton_jq "$R/tektontask/tektontask.yaml"
+    run csgrep --embed 4 <<< "$output"
     assert_output_file "$R/tektontask/csgrep.embed4.txt"
 }
 
 @test "sarif-fmt the results" {
     skip_unless_have_cmd csgrep sarif-fmt
-    run csgrep_sarif_fmt < "$R/tektontask/shellcheck.json"
+    run checkton_jq "$R/tektontask/tektontask.yaml"
+    run csgrep_sarif_fmt <<< "$output"
     assert_output_file "$R/tektontask/sarif-fmt.txt"
 }
