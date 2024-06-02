@@ -34,4 +34,4 @@ runs:
   env:
     CHECKTON_DIFF_BASE: ${{ inputs.pull-request-base }}
     CHECKTON_DIFF_HEAD: ${{ inputs.pull-request-head }}
-    CHECKTON_FAIL_ON_FINDINGS: ${{ inputs.fail-on-warnings }}
+    CHECKTON_FAIL_ON_FINDINGS: ${{ inputs.fail-on-findings }}
