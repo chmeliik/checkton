@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: some-task
+spec:
+  steps:
+    - name: script-with-shebang
+      image: foo:latest
+      script: |
+        #!/bin/bash
+
+        echo "Listen. Strange women lying in ponds distributing swords is no basis for a system of government."
+
+    - name: script-without-shebang
+      image: foo:latest
+      script: |
+        echo "Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony."
+
+    - name: script-in-different-attr
+      image: foo:latest
+      env:
+        - name: SCRIPT
+          value: |
+            #!/usr/bin/env bash
+            set -euo pipefail
+
+            echo "You can't expect to wield supreme executive power just 'cause some watery tart threw a sword at you!"
+      script: |
+        eval $SCRIPT
+
+    - name: script-with-broken-shebang
+      image: foo:latest
+      script: |
+        #!/bin/bash -e -u -o pipefail
+        echo "I mean, if I went around saying I was an emperor just because some moistened bint had lobbed a scimitar at me, they'd put me away!"

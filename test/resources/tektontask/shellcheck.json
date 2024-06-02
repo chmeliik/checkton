@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "file": "test/resources/tektontask/tektontask.yaml",
+      "line": 34,
+      "endLine": 34,
+      "column": 9,
+      "endColumn": 38,
+      "level": "error",
+      "code": 2096,
+      "message": "On most OS, shebangs can only specify a single parameter.",
+      "fix": null
+    },
+    {
+      "file": "test/resources/tektontask/tektontask.yaml",
+      "line": 29,
+      "endLine": 29,
+      "column": 14,
+      "endColumn": 21,
+      "level": "info",
+      "code": 2086,
+      "message": "Double quote to prevent globbing and word splitting.",
+      "fix": {
+        "replacements": [
+          {
+            "column": 14,
+            "endColumn": 14,
+            "endLine": 29,
+            "insertionPoint": "afterEnd",
+            "line": 29,
+            "precedence": 7,
+            "replacement": "\""
+          },
+          {
+            "column": 21,
+            "endColumn": 21,
+            "endLine": 29,
+            "insertionPoint": "beforeStart",
+            "line": 29,
+            "precedence": 7,
+            "replacement": "\""
+          }
+        ]
+      }
+    }
+  ]
+}

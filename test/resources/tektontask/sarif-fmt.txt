@@ -1,0 +1,14 @@
+error: On most OS, shebangs can only specify a single parameter.
+   ┌─ test/resources/tektontask/tektontask.yaml:34:9
+   │
+34 │         #!/bin/bash -e -u -o pipefail
+   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: Double quote to prevent globbing and word splitting.
+   ┌─ test/resources/tektontask/tektontask.yaml:29:14
+   │
+29 │         eval $SCRIPT
+   │              ^^^^^^^
+
+warning: 1 warnings emitted
+error: 1 errors emitted
