@@ -9,7 +9,8 @@ mapfile -t updated_rpms < <(
         csdiff \
         git \
         jq \
-        python-unversioned-command |
+        python-unversioned-command \
+        sarif-fmt |
     awk '
         /Available packages/ { flag = 1; next }
         flag { sub(/\..*/, "", $1); printf "%s-%s\n", $1, $2 }
