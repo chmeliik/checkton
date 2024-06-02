@@ -25,19 +25,29 @@ skip_unless_have_cmd() {
     done
 }
 
+assert_output_file() {
+    local expected_output_file=$1
+    if [[ "${GENERATE_EXPECTED_OUTPUT:-}" == "true" ]]; then
+        mkdir -p "$(dirname "$expected_output_file")"
+        printf "%s\n" "$output" > "$expected_output_file"
+    else
+        assert_output "$(cat "$expected_output_file")"
+    fi
+}
+
 @test "checkton a Tekton YAML" {
     run checkton_jq "$R/tektontask/tektontask.yaml"
-    assert_output "$(cat "$R/tektontask/shellcheck.json")"
+    assert_output_file "$R/tektontask/shellcheck.json"
 }
 
 @test "csgrep the results" {
     skip_unless_have_cmd csgrep
     run csgrep --embed 4 < "$R/tektontask/shellcheck.json"
-    assert_output "$(cat "$R/tektontask/csgrep.embed4.txt")"
+    assert_output_file "$R/tektontask/csgrep.embed4.txt"
 }
 
 @test "sarif-fmt the results" {
     skip_unless_have_cmd csgrep sarif-fmt
     run csgrep_sarif_fmt < "$R/tektontask/shellcheck.json"
-    assert_output "$(cat "$R/tektontask/sarif-fmt.txt")"
+    assert_output_file "$R/tektontask/sarif-fmt.txt"
 }
