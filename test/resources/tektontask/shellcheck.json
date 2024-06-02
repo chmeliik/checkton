@@ -42,6 +42,17 @@
           }
         ]
       }
+    },
+    {
+      "file": "test/resources/tektontask/tektontask.yaml",
+      "line": 27,
+      "endLine": 27,
+      "column": 86,
+      "endColumn": 98,
+      "level": "warning",
+      "code": 2154,
+      "message": "watery_tart is referenced but not assigned.",
+      "fix": null
     }
   ]
 }

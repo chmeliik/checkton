@@ -24,7 +24,7 @@ spec:
             #!/usr/bin/env bash
             set -euo pipefail
 
-            echo "You can't expect to wield supreme executive power just 'cause some watery tart threw a sword at you!"
+            echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
       script: |
         eval $SCRIPT
 

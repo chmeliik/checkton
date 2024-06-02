@@ -9,9 +9,19 @@ test/resources/tektontask/tektontask.yaml:34:9: error[SC2096]: On most OS, sheba
 Error: SHELLCHECK_WARNING:
 test/resources/tektontask/tektontask.yaml:29:14: info[SC2086]: Double quote to prevent globbing and word splitting.
 #   26|   
-#   27|               echo "You can't expect to wield supreme executive power just 'cause some watery tart threw a sword at you!"
+#   27|               echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
 #   28|         script: |
 #   29|->         eval $SCRIPT
 #   30|   
 #   31|       - name: script-with-broken-shebang
 #   32|         image: foo:latest
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/tektontask.yaml:27:86: warning[SC2154]: watery_tart is referenced but not assigned.
+#   24|               #!/usr/bin/env bash
+#   25|               set -euo pipefail
+#   26|   
+#   27|->             echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
+#   28|         script: |
+#   29|           eval $SCRIPT
+#   30|   
