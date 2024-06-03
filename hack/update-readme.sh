@@ -8,7 +8,7 @@ fmt() {
             "### `\(.key)`\n\n"
             + if .value.required then "**\\[REQUIRED\\]**\n\n" else "" end
             + .value.description + "\n\n"
-            + if .value.default then "* default: `\(.value.default)`\n" else "" end
+            + if .value.default != null then "* default: `\(.value.default)`\n" else "" end
         )
     ' | fold -w 80 -s | sed 's/ *$//'
 }

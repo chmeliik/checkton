@@ -66,6 +66,28 @@ reporting.)
 
 * default: `true`
 
+### `find-renames`
+
+Similarity threshold to detect renamed files (see the git-diff manpage). Set to
+false to disable finding renames.
+
+* default: `50%`
+
+### `find-copies`
+
+Similarity threshold to detect copied files (see the git-diff manpage). Set to
+false to disable finding copies.
+
+* default: `50%`
+
+### `find-copies-harder`
+
+Inspect unmodified files as candidates for the source of copy. This is a very
+expensive operation for large projects, so use it with caution. (See the
+git-diff manpage).
+
+* default: `false`
+
 ## Outputs
 
 ### `sarif`

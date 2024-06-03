@@ -23,6 +23,26 @@ inputs:
       going to upload the SARIF report anyway. GitHub takes care of the reporting.)
     required: false
     default: true
+  find-renames:
+    description: >-
+      Similarity threshold to detect renamed files (see the git-diff manpage).
+      Set to false to disable finding renames.
+    required: false
+    default: 50%
+  find-copies:
+    description: >-
+      Similarity threshold to detect copied files (see the git-diff manpage).
+      Set to false to disable finding copies.
+    required: false
+    default: 50%
+  find-copies-harder:
+    description: >-
+       Inspect unmodified files as candidates for the source of copy.
+       This is a very expensive operation for large projects, so use it with caution.
+       (See the git-diff manpage).
+    required: false
+    default: false
+
 
 outputs:
   sarif:
@@ -35,3 +55,6 @@ runs:
     CHECKTON_DIFF_BASE: ${{ inputs.pull-request-base }}
     CHECKTON_DIFF_HEAD: ${{ inputs.pull-request-head }}
     CHECKTON_FAIL_ON_FINDINGS: ${{ inputs.fail-on-findings }}
+    CHECKTON_FIND_RENAMES: ${{ inputs.find-renames }}
+    CHECKTON_FIND_COPIES: ${{ inputs.find-copies }}
+    CHECKTON_FIND_COPIES_HARDER: ${{ inputs.find-copies-harder }}
