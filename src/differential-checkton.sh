@@ -20,6 +20,10 @@ trap cleanup EXIT
 
 diff_args=(--name-status --diff-filter=d)
 
+if [[ "${CHECKTON_FIND_RENAMES:-}" != "false" ]]; then
+    diff_args+=("-M${CHECKTON_FIND_RENAMES:-}")
+fi
+
 if [[ "${CHECKTON_FIND_COPIES:-}" != "false" ]]; then
     diff_args+=("-C${CHECKTON_FIND_COPIES:-}")
 
@@ -55,12 +59,14 @@ while read -r status name new_name; do
     if [[ -n "$new_name" ]]; then
         old_files+=("$name")
         new_files+=("$new_name")
-        if [[ "$status" != *C* || "${CHECKTON_TREAT_COPY_AS_RENAME:-}" == "true" ]]; then
+        # git looks for renames by default, so filter them out if it's explicitly disabled
+        # (this is not the case for copies)
+        if [[ "$status" != *R* || "${CHECKTON_FIND_RENAMES:-}" != "false" ]]; then
             renames+=$(jq -n -c --arg old "$name" --arg new "$new_name" '{($old): $new}')
         fi
     else
         new_files+=("$name")
-        # status includes A => the file is new
+        # status includes A => the file didn't exist in the base ref
         if [[ "$status" != *A* ]]; then
             old_files+=("$name")
         fi
@@ -83,7 +89,7 @@ fi
 
 checkton "${new_files[@]}" > "$new_results"
 
-if [[ "$renames" != "" && "${CHECKTON_HANDLE_RENAMES:-true}" == "true" ]]; then
+if [[ "$renames" != "" ]]; then
     renames_json=$(jq -c -s 'reduce .[] as $kv ({}; . * $kv)' <<< "$renames")
     # For renamed/copied files, duplicate their comments (with the renamed filepath).
     # This allows csdiff to diff the reports as if the copied/renamed files had already
