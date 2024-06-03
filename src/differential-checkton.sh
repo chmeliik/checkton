@@ -18,12 +18,22 @@ cleanup() {
 WORKDIR=$(mktemp -d --tmpdir "checkton-workdir.XXXXXX")
 trap cleanup EXIT
 
+diff_args=(--name-status --diff-filter=d)
+
+if [[ "${CHECKTON_FIND_COPIES:-}" != "false" ]]; then
+    diff_args+=("-C${CHECKTON_FIND_COPIES:-}")
+
+    if [[ "${CHECKTON_FIND_COPIES_HARDER:-}" == "true" ]]; then
+        diff_args+=(--find-copies-harder)
+    fi
+fi
+
 files_to_check=$(
     {
-        git log --name-status --pretty=format: --diff-filter=d "${base}..${head}"
+        git log "${diff_args[@]}" --pretty=format: "${base}..${head}"
         # handle uncommitted changes as well
-        git diff --name-status --diff-filter=d
-        git diff --staged --name-status --diff-filter=d
+        git diff "${diff_args[@]}"
+        git diff --staged "${diff_args[@]}"
     } | awk '/\.ya?ml$/' | sort -u
 )
 
@@ -75,11 +85,18 @@ checkton "${new_files[@]}" > "$new_results"
 
 if [[ "$renames" != "" && "${CHECKTON_HANDLE_RENAMES:-true}" == "true" ]]; then
     renames_json=$(jq -c -s 'reduce .[] as $kv ({}; . * $kv)' <<< "$renames")
-    renamed=$(
-        jq -c --argjson renames "$renames_json" '.comments[].file |= ($renames[.] // .)' \
-            < "$old_results"
+    # For renamed/copied files, duplicate their comments (with the renamed filepath).
+    # This allows csdiff to diff the reports as if the copied/renamed files had already
+    # existed in the base ref (rather than treating such files as completely new).
+    updated=$(
+        jq < "$old_results" -c --argjson renames "$renames_json" '
+            . as $original
+            | .comments | map(select($renames[.file]) | .file |= $renames[.]) as $renamed_comments
+            | $original
+            | .comments += $renamed_comments
+        '
     )
-    printf "%s\n" "$renamed" > "$old_results"
+    printf "%s\n" "$updated" > "$old_results"
 fi
 
 csdiff "$old_results" "$new_results"
