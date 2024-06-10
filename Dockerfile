@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-minimal:40@sha256:2d724b802b53e008ba99fa8460cbd47a54d6d129b8bfc0fad8034f97b70f416d
+FROM registry.fedoraproject.org/fedora-minimal:40@sha256:db7063868f49a9e9ecb552e8ea5886e505b02629b4ee33cd70a4eba971019b32
 
 RUN microdnf -y install \
         --setopt install_weak_deps=false \
