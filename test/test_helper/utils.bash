@@ -10,12 +10,6 @@ csgrep_sarif_fmt() {
     csgrep --mode=sarif | sarif-fmt --color never
 }
 
-skip_unless_have_cmd() {
-    for cmd in "$@"; do
-        command -v "$cmd" >/dev/null || skip "missing command: $cmd"
-    done
-}
-
 assert_output_file() {
     local output=$1
     local expected_output_file=$2
@@ -25,4 +19,15 @@ assert_output_file() {
     else
         assert_output "$(cat "$expected_output_file")"
     fi
+}
+
+test_human_readable_files() {
+    local csgrep_input=$1
+    local expected_files_dir=$2
+
+    run csgrep --embed 4 <<< "$csgrep_input"
+    assert_output_file "$output" "$expected_files_dir/csgrep.embed4.txt"
+
+    run csgrep_sarif_fmt <<< "$csgrep_input"
+    assert_output_file "$output" "$expected_files_dir/sarif-fmt.txt"
 }
