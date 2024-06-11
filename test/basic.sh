@@ -23,19 +23,7 @@ checkton_jq() {
 
 @test "checkton a Tekton YAML" {
     run checkton_jq "$R/tektontask/tektontask.yaml"
-    assert_output_file "$output" "$R/tektontask/shellcheck.json"
-}
-
-@test "csgrep the results" {
-    skip_unless_have_cmd csgrep
-    run checkton_jq "$R/tektontask/tektontask.yaml"
-    run csgrep --embed 4 <<< "$output"
-    assert_output_file "$output" "$R/tektontask/csgrep.embed4.txt"
-}
-
-@test "sarif-fmt the results" {
-    skip_unless_have_cmd csgrep sarif-fmt
-    run checkton_jq "$R/tektontask/tektontask.yaml"
-    run csgrep_sarif_fmt <<< "$output"
-    assert_output_file "$output" "$R/tektontask/sarif-fmt.txt"
+    local checkton_output="$output"
+    assert_output_file "$checkton_output" "$R/tektontask/shellcheck.json"
+    test_human_readable_files "$checkton_output" "$R/tektontask"
 }
