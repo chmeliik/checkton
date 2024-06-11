@@ -55,6 +55,12 @@ test_differential_checkton() {
         "$R/patches/0001-Add-a-script-with-some-issues.patch"
 }
 
+@test "report only new issues in renamed file" {
+    test_differential_checkton renamed \
+        "$R/patches/0001-Add-a-script-with-some-issues.patch" \
+        "$R/patches/0001-Rename-tektontask-to-cooltask.patch"
+}
+
 @test "set old base commit, thus reporting all issues" {
     local first_commit
     first_commit=$(git rev-list --max-parents=0 HEAD)
