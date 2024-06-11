@@ -1,0 +1,27 @@
+From c32f9e32cf3fefa98fc23a950a0fbdd0507a813d Mon Sep 17 00:00:00 2001
+From: Adam Cmiel <acmiel@redhat.com>
+Date: Tue, 11 Jun 2024 10:36:09 +0200
+Subject: [PATCH] Add a script with some issues
+
+---
+ test/resources/tektontask/tektontask.yaml | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/test/resources/tektontask/tektontask.yaml b/test/resources/tektontask/tektontask.yaml
+index 24b74e3..293c9b1 100644
+--- a/test/resources/tektontask/tektontask.yaml
++++ b/test/resources/tektontask/tektontask.yaml
+@@ -33,3 +33,10 @@ spec:
+       script: |-
+         #!/bin/bash -e -u -o pipefail
+         echo "I mean, if I went around saying I was an emperor just because some moistened bint had lobbed a scimitar at me, they'd put me away!"
++
++    - name: new-script
++      image: foo:latest
++      script: |
++        if [[ violence = 'inherent in the system' ]]; then
++          echo "Ah, now we see the violence inherent in the system!"
++        fi
+-- 
+2.45.1
+
