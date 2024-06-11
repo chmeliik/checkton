@@ -1,0 +1,72 @@
+{
+    "defects": [
+        {
+            "checker": "SHELLCHECK_WARNING",
+            "language": "shell",
+            "tool": "shellcheck",
+            "key_event_idx": 0,
+            "events": [
+                {
+                    "file_name": "test/resources/tektontask/tektontask.yaml",
+                    "line": 40,
+                    "column": 12,
+                    "h_size": 41,
+                    "event": "warning[SC3010]",
+                    "message": "In POSIX sh, [[ ]] is undefined.",
+                    "verbosity_level": 0
+                }
+            ]
+        },
+        {
+            "checker": "SHELLCHECK_WARNING",
+            "language": "shell",
+            "tool": "shellcheck",
+            "key_event_idx": 0,
+            "events": [
+                {
+                    "file_name": "test/resources/tektontask/tektontask.yaml",
+                    "line": 40,
+                    "column": 24,
+                    "h_size": 1,
+                    "event": "warning[SC2050]",
+                    "message": "This expression is constant. Did you forget the $ on a variable?",
+                    "verbosity_level": 0
+                }
+            ]
+        },
+        {
+            "checker": "SHELLCHECK_WARNING",
+            "language": "shell",
+            "tool": "shellcheck",
+            "key_event_idx": 0,
+            "events": [
+                {
+                    "file_name": "test/resources/tektontask/cooltask.yaml",
+                    "line": 40,
+                    "column": 12,
+                    "h_size": 41,
+                    "event": "warning[SC3010]",
+                    "message": "In POSIX sh, [[ ]] is undefined.",
+                    "verbosity_level": 0
+                }
+            ]
+        },
+        {
+            "checker": "SHELLCHECK_WARNING",
+            "language": "shell",
+            "tool": "shellcheck",
+            "key_event_idx": 0,
+            "events": [
+                {
+                    "file_name": "test/resources/tektontask/cooltask.yaml",
+                    "line": 40,
+                    "column": 24,
+                    "h_size": 1,
+                    "event": "warning[SC2050]",
+                    "message": "This expression is constant. Did you forget the $ on a variable?",
+                    "verbosity_level": 0
+                }
+            ]
+        }
+    ]
+}

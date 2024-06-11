@@ -1,0 +1,35 @@
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/tektontask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ ]] is undefined.
+#   37|       - name: new-script
+#   38|         image: foo:latest
+#   39|         script: |
+#   40|->         if [[ violence = 'inherent in the system' ]]; then
+#   41|             echo "Ah, now we see the violence inherent in the system!"
+#   42|           fi
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/tektontask.yaml:40:24: warning[SC2050]: This expression is constant. Did you forget the $ on a variable?
+#   37|       - name: new-script
+#   38|         image: foo:latest
+#   39|         script: |
+#   40|->         if [[ violence = 'inherent in the system' ]]; then
+#   41|             echo "Ah, now we see the violence inherent in the system!"
+#   42|           fi
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ ]] is undefined.
+#   37|       - name: new-script
+#   38|         image: foo:latest
+#   39|         script: |
+#   40|->         if [[ violence = 'inherent in the system' ]]; then
+#   41|             echo "Ah, now we see the violence inherent in the system!"
+#   42|           fi
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/cooltask.yaml:40:24: warning[SC2050]: This expression is constant. Did you forget the $ on a variable?
+#   37|       - name: new-script
+#   38|         image: foo:latest
+#   39|         script: |
+#   40|->         if [[ violence = 'inherent in the system' ]]; then
+#   41|             echo "Ah, now we see the violence inherent in the system!"
+#   42|           fi
