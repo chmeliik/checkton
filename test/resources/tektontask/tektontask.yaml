@@ -13,7 +13,7 @@ spec:
 
     - name: script-without-shebang
       image: foo:latest
-      script: |
+      script: >
         echo "Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony."
 
     - name: script-in-different-attr
@@ -25,11 +25,11 @@ spec:
             set -euo pipefail
 
             echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
-      script: |
+      script: |+
         eval $SCRIPT
 
     - name: script-with-broken-shebang
       image: foo:latest
-      script: |
+      script: |-
         #!/bin/bash -e -u -o pipefail
         echo "I mean, if I went around saying I was an emperor just because some moistened bint had lobbed a scimitar at me, they'd put me away!"

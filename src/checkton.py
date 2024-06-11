@@ -28,12 +28,14 @@ def list_shell_scripts(yamlfile: Path) -> list[InlineScript]:
     prev_nonempty_line = None
 
     def is_shell(line: str, prev_line: str | None) -> Literal["explicit", "implicit"] | None:
+        # matches e.g. 'script:', 'script: |-' etc.
+        script_attr = re.compile(r"\s*script:(\s+[>|][-+]?)?\s*$")
         shebang = re.compile(r"^\s*#!(?:/usr)?(?:/local)?/bin/(?:env )?(\S+)")
         known_interpreters = ("sh", "ash", "bash", "dash", "ksh", "bats")
 
         if match := shebang.match(line):
             return "explicit" if match.group(1) in known_interpreters else None
-        elif prev_line and prev_line.lstrip().startswith("script:"):
+        elif prev_line and script_attr.match(prev_line):
             return "implicit"
         else:
             return None
