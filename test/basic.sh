@@ -1,5 +1,4 @@
 #!/usr/bin/env bats
-# vim: ft=bash
 
 setup() {
     load 'test_helper/utils'

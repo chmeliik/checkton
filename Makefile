@@ -11,7 +11,7 @@ test: build-image
 		-v "$(PWD):/code:z" \
 		-e GENERATE_EXPECTED_OUTPUT=$(GENERATE_EXPECTED_OUTPUT) \
 		-w /code $(IMAGE):latest \
-	test/bats/bin/bats test/*.bats
+	test/bats/bin/bats test/*.sh
 
 .PHONY: generate-expected-test-output
 generate-expected-test-output: GENERATE_EXPECTED_OUTPUT = true
