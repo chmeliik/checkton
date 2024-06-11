@@ -1,0 +1,62 @@
+From e6d5c0ddad22dfab420155a1383521b35edff739 Mon Sep 17 00:00:00 2001
+From: Adam Cmiel <acmiel@redhat.com>
+Date: Tue, 11 Jun 2024 13:57:59 +0200
+Subject: [PATCH] Copy tektontask to cooltask
+
+Signed-off-by: Adam Cmiel <acmiel@redhat.com>
+---
+ test/resources/tektontask/cooltask.yaml | 42 +++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+ create mode 100644 test/resources/tektontask/cooltask.yaml
+
+diff --git a/test/resources/tektontask/cooltask.yaml b/test/resources/tektontask/cooltask.yaml
+new file mode 100644
+index 0000000..293c9b1
+--- /dev/null
++++ b/test/resources/tektontask/cooltask.yaml
+@@ -0,0 +1,42 @@
++apiVersion: tekton.dev/v1
++kind: Task
++metadata:
++  name: some-task
++spec:
++  steps:
++    - name: script-with-shebang
++      image: foo:latest
++      script: |
++        #!/bin/bash
++
++        echo "Listen. Strange women lying in ponds distributing swords is no basis for a system of government."
++
++    - name: script-without-shebang
++      image: foo:latest
++      script: >
++        echo "Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony."
++
++    - name: script-in-different-attr
++      image: foo:latest
++      env:
++        - name: SCRIPT
++          value: |
++            #!/usr/bin/env bash
++            set -euo pipefail
++
++            echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
++      script: |+
++        eval $SCRIPT
++
++    - name: script-with-broken-shebang
++      image: foo:latest
++      script: |-
++        #!/bin/bash -e -u -o pipefail
++        echo "I mean, if I went around saying I was an emperor just because some moistened bint had lobbed a scimitar at me, they'd put me away!"
++
++    - name: new-script
++      image: foo:latest
++      script: |
++        if [[ violence = 'inherent in the system' ]]; then
++          echo "Ah, now we see the violence inherent in the system!"
++        fi
+-- 
+2.45.1
+
