@@ -1,0 +1,18 @@
+From f61b8fba95ae506c594cee9379d57a8a352840b0 Mon Sep 17 00:00:00 2001
+From: Adam Cmiel <acmiel@redhat.com>
+Date: Tue, 11 Jun 2024 13:38:10 +0200
+Subject: [PATCH] Rename tektontask to cooltask
+
+Signed-off-by: Adam Cmiel <acmiel@redhat.com>
+---
+ test/resources/tektontask/{tektontask.yaml => cooltask.yaml} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename test/resources/tektontask/{tektontask.yaml => cooltask.yaml} (100%)
+
+diff --git a/test/resources/tektontask/tektontask.yaml b/test/resources/tektontask/cooltask.yaml
+similarity index 100%
+rename from test/resources/tektontask/tektontask.yaml
+rename to test/resources/tektontask/cooltask.yaml
+-- 
+2.45.1
+
