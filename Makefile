@@ -16,3 +16,7 @@ test: build-image
 .PHONY: generate-expected-test-output
 generate-expected-test-output: GENERATE_EXPECTED_OUTPUT = true
 generate-expected-test-output: test
+
+.PHONY: generate-test-patches
+generate-test-patches:
+	test/resources/patches/generate.sh
