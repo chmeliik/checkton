@@ -5,5 +5,8 @@
   ],
   "schedule": [
     "every monday"
-  ]
+  ],
+  "git-submodules": {
+    "enabled": true
+  }
 }
