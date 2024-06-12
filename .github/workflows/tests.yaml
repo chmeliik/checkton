@@ -16,6 +16,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          # differential-checkton tests require full commit history
+          fetch-depth: 0
           submodules: true
 
       - name: Build image
