@@ -1,0 +1,140 @@
+name: Build Image
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - image/v*
+  pull_request:
+
+env:
+  GITHUB_JSON: ${{ toJSON(github) }}
+  REGISTRY: ghcr.io
+  SCOPED_NAME: ${{ github.repository }}  # owner/repo_name
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      attestations: write
+      packages: write
+      contents: read
+
+    outputs:
+      versioned_image: ${{ steps.tag.outputs.versioned_image }}
+      digest: ${{ steps.push.outputs.digest }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: Dockerfile
+          image: ${{ env.IMAGE }}
+          tags: |
+            ${{ github.sha }}
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: ${{ env.IMAGE }}:${{ github.sha }}
+          format: cyclonedx-json
+          output-file: .sbom.json
+          upload-artifact: false
+          upload-release-assets: false
+
+      - name: Login to registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push image
+        id: push
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          image: ${{ env.SCOPED_NAME }}
+          tags: |
+            ${{ github.sha }}
+
+      - name: Generate image attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.IMAGE }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+
+      - name: Generate SBOM attestation
+        uses: actions/attest-sbom@v1
+        with:
+          subject-name: ${{ env.IMAGE }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          sbom-path: .sbom.json
+          push-to-registry: true
+
+      - name: Tag with release version
+        if: ${{ startsWith(github.ref, 'refs/tags/image/v') || true }}
+        id: tag
+        run: |
+          #!/bin/bash
+          set -e
+
+          version='test'
+          skopeo copy "docker://$IMAGE:$GITHUB_SHA" "docker://$IMAGE:$version"
+          echo "versioned_image=$IMAGE:$version" >> "$GITHUB_OUTPUT"
+
+  bump-image:
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.ref, 'refs/tags/image/v') || true }}
+    needs: [build]
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Bump image ref in action.yaml
+        env:
+          VERSIONED_IMAGE: ${{ needs.build.outputs.versioned_image }}
+          DIGEST: ${{ needs.build.outputs.digest }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          #!/bin/bash
+          set -e
+
+          image_with_digest=${VERSIONED_IMAGE}@${DIGEST}
+          sed -E "s;(\s*)image: .*;\1image: $image_with_digest;" -i action.yaml
+
+          if [[ -z "$(git diff)" ]]; then
+              exit
+          fi
+
+          git config --global user.name "checkton-bot"
+          git config --global user.email "<checkton-bot@noreply.org>"
+
+          version=${VERSIONED_IMAGE##*:}  # extract the tag
+          git checkout -b "selfupdate/$version"
+
+          msg="action.yaml: update image to $version"
+
+          cat <<- EOF > /tmp/body.txt
+          Update the action image to \`$image_with_digest\`.
+
+          You may wish to verify that this image is legit:
+
+          \`\`\`
+          gh attestation verify oci://$image_with_digest --repo $GITHUB_REPOSITORY
+          \`\`\`
+          EOF
+
+          git add action.yaml
+          git commit -m "$msg"
+
+          git push -f --set-upstream origin "selfupdate/$version"
+          gh pr create --title "$msg" --body-file /tmp/body.txt
