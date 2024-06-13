@@ -50,7 +50,7 @@ outputs:
 
 runs:
   using: docker
-  image: Dockerfile
+  image: ghcr.io/chmeliik/checkton:test@sha256:ffd2cadcd2687752cca0e87995400686e35f427ac208aba44086baf48212df8c
   env:
     CHECKTON_DIFF_BASE: ${{ inputs.pull-request-base }}
     CHECKTON_DIFF_HEAD: ${{ inputs.pull-request-head }}
