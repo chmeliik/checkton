@@ -89,7 +89,7 @@ jobs:
   # If the image gets tagged with a release version, automatically bump it in the action.yaml
   bump-image:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref, 'refs/tags/image-v') || true }}
+    if: ${{ startsWith(github.ref, 'refs/tags/image-v') }}
     needs: [build]
     permissions:
       contents: write
