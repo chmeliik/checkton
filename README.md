@@ -46,6 +46,13 @@ jobs:
 
 ## Inputs
 
+### `differential`
+
+Report new issues introduced in a Pull Request, ignore existing issues. Set to
+false to report all issues in all files.
+
+* default: `true`
+
 ### `pull-request-base`
 
 Hash of the latest commit in the base branch.
