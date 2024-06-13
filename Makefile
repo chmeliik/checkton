@@ -1,11 +1,13 @@
 IMAGE = ghcr.io/chmeliik/checkton
+INSTALL_NCURSES = false
 GENERATE_EXPECTED_OUTPUT = false
 
 .PHONY: build-image
 build-image:
-	podman build -t $(IMAGE):latest .
+	podman build -t $(IMAGE):latest --build-arg INSTALL_NCURSES=$(INSTALL_NCURSES) .
 
 .PHONY: test
+test: INSTALL_NCURSES = true
 test: build-image
 	podman run --rm -ti \
 		-v "$(PWD):/code:z" \
