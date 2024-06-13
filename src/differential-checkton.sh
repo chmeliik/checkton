@@ -18,28 +18,35 @@ cleanup() {
 WORKDIR=$(mktemp -d --tmpdir "checkton-workdir.XXXXXX")
 trap cleanup EXIT
 
-diff_args=(--name-status --diff-filter=d)
+if [[ "${CHECKTON_DIFFERENTIAL:-}" == "false" ]]; then
+    # prepend A\t to filenames as if they were all Added
+    files_to_check=$(git ls-tree -r --name-only "$head" | sed 's/^/A\t/')
+else
+    diff_args=(--name-status --diff-filter=d)
 
-if [[ "${CHECKTON_FIND_RENAMES:-}" != "false" ]]; then
-    diff_args+=("-M${CHECKTON_FIND_RENAMES:-}")
-fi
-
-if [[ "${CHECKTON_FIND_COPIES:-}" != "false" ]]; then
-    diff_args+=("-C${CHECKTON_FIND_COPIES:-}")
-
-    if [[ "${CHECKTON_FIND_COPIES_HARDER:-}" == "true" ]]; then
-        diff_args+=(--find-copies-harder)
+    if [[ "${CHECKTON_FIND_RENAMES:-}" != "false" ]]; then
+        diff_args+=("-M${CHECKTON_FIND_RENAMES:-}")
     fi
+
+    if [[ "${CHECKTON_FIND_COPIES:-}" != "false" ]]; then
+        diff_args+=("-C${CHECKTON_FIND_COPIES:-}")
+
+        if [[ "${CHECKTON_FIND_COPIES_HARDER:-}" == "true" ]]; then
+            diff_args+=(--find-copies-harder)
+        fi
+    fi
+
+    files_to_check=$(
+        {
+            git log "${diff_args[@]}" --pretty=format: "${base}..${head}"
+            # handle uncommitted changes as well
+            git diff "${diff_args[@]}"
+            git diff --staged "${diff_args[@]}"
+        }
+    )
 fi
 
-files_to_check=$(
-    {
-        git log "${diff_args[@]}" --pretty=format: "${base}..${head}"
-        # handle uncommitted changes as well
-        git diff "${diff_args[@]}"
-        git diff --staged "${diff_args[@]}"
-    } | awk '/\.ya?ml$/' | sort -u
-)
+files_to_check=$(awk '/\.ya?ml$/' <<< "$files_to_check" | sort -u)
 
 {
     echo "Files to check:"

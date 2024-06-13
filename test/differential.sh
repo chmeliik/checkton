@@ -82,3 +82,9 @@ test_differential_checkton() {
     CHECKTON_DIFF_BASE=$first_commit \
     test_differential_checkton old-base
 }
+
+@test "set CHECKTON_DIFFERENTIAL=false, thus reporting all issues" {
+    CHECKTON_DIFFERENTIAL=false \
+    test_differential_checkton diff-disabled \
+        "$R/patches/0001-Add-a-script-with-some-issues.patch"
+}
