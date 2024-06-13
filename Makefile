@@ -1,10 +1,10 @@
-IMAGE = ghcr.io/chmeliik/checkton
+IMAGE = localhost/checkton
 INSTALL_NCURSES = false
 GENERATE_EXPECTED_OUTPUT = false
 
 .PHONY: build-image
 build-image:
-	podman build -t $(IMAGE):latest --build-arg INSTALL_NCURSES=$(INSTALL_NCURSES) .
+	podman build -t $(IMAGE) --build-arg INSTALL_NCURSES=$(INSTALL_NCURSES) .
 
 .PHONY: test
 test: INSTALL_NCURSES = true
@@ -12,7 +12,7 @@ test: build-image
 	podman run --rm -ti \
 		-v "$(PWD):/code:z" \
 		-e GENERATE_EXPECTED_OUTPUT=$(GENERATE_EXPECTED_OUTPUT) \
-		-w /code $(IMAGE):latest \
+		-w /code $(IMAGE) \
 	test/bats/bin/bats test/*.sh
 
 .PHONY: generate-expected-test-output
