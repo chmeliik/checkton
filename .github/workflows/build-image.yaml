@@ -25,10 +25,10 @@ jobs:
       digest: ${{ steps.push.outputs.digest }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
       - name: Build image
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
         with:
           containerfiles: Dockerfile
           image: ${{ env.IMAGE }}
@@ -36,7 +36,7 @@ jobs:
             ${{ github.sha }}
 
       - name: Generate SBOM
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751 # v0
         with:
           image: ${{ env.IMAGE }}:${{ github.sha }}
           format: cyclonedx-json
@@ -45,7 +45,7 @@ jobs:
           upload-release-assets: false
 
       - name: Login to registry
-        uses: redhat-actions/podman-login@v1
+        uses: redhat-actions/podman-login@4934294ad0449894bcd1e9f191899d7292469603 # v1
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -53,7 +53,7 @@ jobs:
 
       - name: Push image
         id: push
-        uses: redhat-actions/push-to-registry@v2
+        uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2
         with:
           registry: ${{ env.REGISTRY }}
           image: ${{ env.SCOPED_NAME }}
@@ -61,14 +61,14 @@ jobs:
             ${{ github.sha }}
 
       - name: Generate image attestation
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@534b352d658f90498fd148d231fdbf88f3886a3a # v1
         with:
           subject-name: ${{ env.IMAGE }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
       - name: Generate SBOM attestation
-        uses: actions/attest-sbom@v1
+        uses: actions/attest-sbom@91d05efbc376a456f8abf965e8929c5c04ece8af # v1
         with:
           subject-name: ${{ env.IMAGE }}
           subject-digest: ${{ steps.push.outputs.digest }}
@@ -96,7 +96,7 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
       - name: Bump image ref in action.yaml
         env:
