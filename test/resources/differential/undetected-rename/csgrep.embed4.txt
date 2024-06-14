@@ -1,0 +1,47 @@
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ ]] is undefined.
+#   37|       - name: new-script
+#   38|         image: foo:latest
+#   39|         script: |
+#   40|->         if [[ violence = 'inherent in the system' ]]; then
+#   41|             echo "Ah, now we see the violence inherent in the system!"
+#   42|           fi
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/cooltask.yaml:40:24: warning[SC2050]: This expression is constant. Did you forget the $ on a variable?
+#   37|       - name: new-script
+#   38|         image: foo:latest
+#   39|         script: |
+#   40|->         if [[ violence = 'inherent in the system' ]]; then
+#   41|             echo "Ah, now we see the violence inherent in the system!"
+#   42|           fi
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/cooltask.yaml:34:9: error[SC2096]: On most OS, shebangs can only specify a single parameter.
+#   31|       - name: script-with-broken-shebang
+#   32|         image: foo:latest
+#   33|         script: |-
+#   34|->         #!/bin/bash -e -u -o pipefail
+#   35|           echo "I mean, if I went around saying I was an emperor just because some moistened bint had lobbed a scimitar at me, they'd put me away!"
+#   36|   
+#   37|       - name: new-script
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/cooltask.yaml:29:14: info[SC2086]: Double quote to prevent globbing and word splitting.
+#   26|   
+#   27|               echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
+#   28|         script: |+
+#   29|->         eval $SCRIPT
+#   30|   
+#   31|       - name: script-with-broken-shebang
+#   32|         image: foo:latest
+
+Error: SHELLCHECK_WARNING:
+test/resources/tektontask/cooltask.yaml:27:86: warning[SC2154]: watery_tart is referenced but not assigned.
+#   24|               #!/usr/bin/env bash
+#   25|               set -euo pipefail
+#   26|   
+#   27|->             echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
+#   28|         script: |+
+#   29|           eval $SCRIPT
+#   30|   
