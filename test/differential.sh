@@ -61,6 +61,13 @@ test_differential_checkton() {
         "$R/patches/0001-Rename-tektontask-to-cooltask.patch"
 }
 
+@test "with CHECKTON_FIND_RENAMES=false, report all issues in renamed file" {
+    CHECKTON_FIND_RENAMES=false \
+    test_differential_checkton undetected-rename \
+        "$R/patches/0001-Add-a-script-with-some-issues.patch" \
+        "$R/patches/0001-Rename-tektontask-to-cooltask.patch"
+}
+
 @test "with CHECKTON_FIND_COPIES_HARDER, report only new issues in copied file" {
     CHECKTON_FIND_COPIES_HARDER=true \
     test_differential_checkton detected-copy \
