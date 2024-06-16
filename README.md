@@ -53,6 +53,18 @@ false to report all issues in all files.
 
 * default: `true`
 
+### `include-regex`
+
+Files paths to include (regex pattern).
+
+* default: `\.ya?ml$`
+
+### `exclude-regex`
+
+Files paths to exclude (regex pattern).
+
+* default: `""`
+
 ### `pull-request-base`
 
 Hash of the latest commit in the base branch.
