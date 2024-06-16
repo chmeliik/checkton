@@ -68,8 +68,7 @@ test_differential_checkton() {
         "$R/patches/0001-Rename-tektontask-to-cooltask.patch"
 }
 
-@test "with CHECKTON_FIND_COPIES_HARDER, report only new issues in copied file" {
-    CHECKTON_FIND_COPIES_HARDER=true \
+@test "report only new issues in copied file" {
     test_differential_checkton detected-copy \
         "$R/patches/0001-Add-a-script-with-some-issues.patch" \
         "$R/patches/0001-Copy-tektontask-to-cooltask.patch"
