@@ -79,7 +79,22 @@ _ls_files_to_check() {
         git ls-tree -r --name-only "$HEAD"
     else
         git diff --name-only "${DIFF_ARGS[@]}" "${BASE}...${HEAD}"
-    fi | awk '/\.ya?ml$/' | sort -u
+    fi | _apply_include_exlude_patterns | sort -u
+}
+
+_apply_include_exlude_patterns() {
+    local include_regex=${CHECKTON_INCLUDE_REGEX:-'\.ya?ml$'}
+    local exclude_regex=${CHECKTON_EXCLUDE_REGEX:-}
+
+    _nofail_grep -E "$include_regex" |
+    if [[ -n "$exclude_regex" ]]; then _nofail_grep -v -E "$exclude_regex"; else cat; fi
+}
+
+_nofail_grep() {
+    local rc=0
+    grep "$@" || rc=$?
+    [[ $rc -eq 1 ]] && rc=0
+    return $rc
 }
 
 _should_diff_file() {
