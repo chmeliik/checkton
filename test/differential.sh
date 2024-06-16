@@ -82,6 +82,20 @@ test_differential_checkton() {
         "$R/patches/0001-Copy-tektontask-to-cooltask.patch"
 }
 
+@test "with CHECKTON_INCLUDE_REGEX=cooltask, check only cooltask.yaml" {
+    CHECKTON_INCLUDE_REGEX=cooltask \
+    test_differential_checkton include-pattern \
+        "$R/patches/0001-Add-a-script-with-some-issues.patch" \
+        "$R/patches/0001-Copy-tektontask-to-cooltask.patch"
+}
+
+@test "with CHECKTON_EXCLUDE_REGEX=cooltask, check only tektontask.yaml" {
+    CHECKTON_EXCLUDE_REGEX=cooltask \
+    test_differential_checkton exclude-pattern \
+        "$R/patches/0001-Add-a-script-with-some-issues.patch" \
+        "$R/patches/0001-Copy-tektontask-to-cooltask.patch"
+}
+
 @test "set old base commit, thus reporting all issues" {
     local first_commit
     first_commit=$(git rev-list --max-parents=0 HEAD)
