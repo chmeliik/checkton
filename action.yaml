@@ -15,6 +15,14 @@ inputs:
       Set to false to report all issues in all files.
     required: false
     default: true
+  include-regex:
+    description: Files paths to include (regex pattern).
+    required: false
+    default: '\.ya?ml$'
+  exclude-regex:
+    description: Files paths to exclude (regex pattern).
+    required: false
+    default: ''
   pull-request-base:
     description: Hash of the latest commit in the base branch.
     required: false
@@ -58,6 +66,8 @@ runs:
   image: Dockerfile
   env:
     CHECKTON_DIFFERENTIAL: ${{ inputs.differential }}
+    CHECKTON_INCLUDE_REGEX: ${{ inputs.include-regex }}
+    CHECKTON_EXCLUDE_REGEX: ${{ inputs.exclude-regex }}
     CHECKTON_DIFF_BASE: ${{ inputs.pull-request-base }}
     CHECKTON_DIFF_HEAD: ${{ inputs.pull-request-head }}
     CHECKTON_FAIL_ON_FINDINGS: ${{ inputs.fail-on-findings }}
