@@ -98,7 +98,7 @@ jobs:
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
-      - name: Bump image ref in action.yaml
+      - name: Auto-update files for release
         env:
           VERSIONED_IMAGE: ${{ needs.build.outputs.versioned_image }}
           DIGEST: ${{ needs.build.outputs.digest }}
@@ -106,6 +106,16 @@ jobs:
         run: |
           #!/bin/bash
           set -e
+
+          version=${VERSIONED_IMAGE##*:}  # extract the tag
+
+          prev_image=$(yq '.runs.image' action.yaml)
+          prev_image_without_digest=${prev_image%@*}
+          prev_version=${prev_image_without_digest##*:}
+          if [[ "$prev_version" != v* ]]; then
+              prev_version=""
+          fi
+          hack/update_changelog.py -r "$version" -p "$prev_version" -R "$GITHUB_REPOSITORY"
 
           image_with_digest=${VERSIONED_IMAGE}@${DIGEST}
           sed -E "s;(\s*)image: .*;\1image: $image_with_digest;" -i action.yaml
@@ -117,22 +127,22 @@ jobs:
           git config --global user.name "checkton-bot"
           git config --global user.email "<checkton-bot@noreply.org>"
 
-          version=${VERSIONED_IMAGE##*:}  # extract the tag
           git checkout -b "selfupdate/$version"
 
-          msg="action.yaml: update image to $version"
+          msg="Release $version"
 
           cat <<- EOF > /tmp/body.txt
-          Update the action image to \`$image_with_digest\`.
+          * Update the action image to \`$image_with_digest\`
+          * Mark \`$version\` as released in the CHANGELOG
 
-          You may wish to verify that this image is legit:
+          You may wish to verify that the image is legit:
 
           \`\`\`
           gh attestation verify --repo $GITHUB_REPOSITORY oci://$image_with_digest
           \`\`\`
           EOF
 
-          git add action.yaml
+          git add --update
           git commit -m "$msg"
 
           git push -f --set-upstream origin "selfupdate/$version"
