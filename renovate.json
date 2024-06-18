@@ -7,6 +7,14 @@
     ":semanticCommitTypeAll(deps)",
     ":semanticCommitScopeDisabled"
   ],
+  "packageRules": [
+    {
+      "groupName": "GitHub Actions",
+      "matchManagers": [
+        "github-actions"
+      ]
+    }
+  ],
   "schedule": [
     "every monday"
   ],
