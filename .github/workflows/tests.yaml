@@ -22,8 +22,8 @@ jobs:
 
       - name: Build image
         run: |
-          make build-image
+          make build-image INSTALL_NCURSES=true
 
       - name: Run tests
         run: |
-          make test
+          make test-with-prebuilt-image
