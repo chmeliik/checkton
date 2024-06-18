@@ -1,4 +1,4 @@
-name: Trigger Release
+name: Prepare Release
 on:
   workflow_dispatch:
     inputs:
