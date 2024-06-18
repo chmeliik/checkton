@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Fixed
+
+- The `.runs.image` syntax in action.yaml
 
 ## [v0.1.0-alpha.1] - 2024-06-18
 

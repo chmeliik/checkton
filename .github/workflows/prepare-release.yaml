@@ -126,7 +126,7 @@ jobs:
           hack/update_changelog.py -r "$VERSION" -p "$prev_version" -R "$GITHUB_REPOSITORY"
 
           image_with_digest=${IMAGE}:${VERSION}@${DIGEST}
-          sed -E "s;(\s*)image: .*;\1image: $image_with_digest;" -i action.yaml
+          sed -E "s;(\s*)image: .*;\1image: docker://$image_with_digest;" -i action.yaml
 
           if [[ -z "$(git diff)" ]]; then
               echo "No changes applied. Is this version already released?" >&2
