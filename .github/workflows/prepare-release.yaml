@@ -96,12 +96,22 @@ jobs:
       contents: write
       pull-requests: write
 
+    env:
+      DIGEST: ${{ needs.build.outputs.digest }}
+
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+        with:
+          # differential-checkton tests require full commit history
+          fetch-depth: 0
+          submodules: true
+
+      - name: Test release image
+        run: |
+          make test-with-prebuilt-image IMAGE="${IMAGE}:${VERSION}@${DIGEST}"
 
       - name: Auto-update files for release
         env:
-          DIGEST: ${{ needs.build.outputs.digest }}
           GH_TOKEN: ${{ github.token }}
         run: |
           #!/bin/bash
