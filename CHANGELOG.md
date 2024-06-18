@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+*Nothing yet.*
+
+## [v0.1.0-test] - 2024-06-18
+
 ### Added
 
 - The initial implementation of Checkton :tada:
@@ -15,4 +19,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pre-built container image so that the user's workflow doesn't have to build the
   image
 
-[unreleased]: https://github.com/chmeliik/checkton/commits/main
+[v0.1.0-test]: https://github.com/chmeliik/checkton/releases/tag/v0.1.0-test
+[unreleased]: https://github.com/chmeliik/checkton/compare/v0.1.0-test...HEAD
