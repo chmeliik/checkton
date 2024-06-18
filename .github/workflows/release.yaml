@@ -14,5 +14,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
 
+      - name: Verify that tag matches image version in action.yaml
+        run: |
+          #!/bin/bash
+          set -e
+
+          tag=${GITHUB_REF#refs/tags/}
+
+          image=$(yq '.runs.image' action.yaml)
+          image_without_digest=${image%@*}
+          version=${image_without_digest##*:}
+
+          if [[ "$tag" != "$version" ]]; then
+              echo "Tag does not match action.yaml image version: $tag X $image" >&2
+              exit 1
+          fi
+
       - name: Release
         uses: softprops/action-gh-release@69320dbe05506a9a39fc8ae11030b214ec2d1f87 # v2
