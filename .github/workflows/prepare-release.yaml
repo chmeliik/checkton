@@ -120,7 +120,7 @@ jobs:
           prev_image=$(yq '.runs.image' action.yaml)
           prev_image_without_digest=${prev_image%@*}
           prev_version=${prev_image_without_digest##*:}  # extract tag
-          if [[ ! "$prev_version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ ! "$prev_version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-.*)?$ ]]; then
               prev_version=""
           fi
           hack/update_changelog.py -r "$VERSION" -p "$prev_version" -R "$GITHUB_REPOSITORY"
