@@ -1,17 +1,17 @@
-From 3cb2643fee882840579c9c21e1e0bfd8e2362052 Mon Sep 17 00:00:00 2001
+From fd54d9f8a8dfdca57d991fc36cfa4fc2ddf3b625 Mon Sep 17 00:00:00 2001
 From: Checkton Patcher <checkton-patcher@noreply.org>
-Date: Wed, 12 Jun 2024 10:11:52 +0200
+Date: Thu, 20 Jun 2024 16:01:21 +0200
 Subject: [PATCH] Rename tektontask to cooltask
 
 ---
- test/resources/tektontask/{tektontask.yaml => cooltask.yaml} | 0
+ test/resources/files-to-check/{tektontask.yaml => cooltask.yaml} | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
- rename test/resources/tektontask/{tektontask.yaml => cooltask.yaml} (100%)
+ rename test/resources/files-to-check/{tektontask.yaml => cooltask.yaml} (100%)
 
-diff --git a/test/resources/tektontask/tektontask.yaml b/test/resources/tektontask/cooltask.yaml
+diff --git a/test/resources/files-to-check/tektontask.yaml b/test/resources/files-to-check/cooltask.yaml
 similarity index 100%
-rename from test/resources/tektontask/tektontask.yaml
-rename to test/resources/tektontask/cooltask.yaml
+rename from test/resources/files-to-check/tektontask.yaml
+rename to test/resources/files-to-check/cooltask.yaml
 -- 
 2.45.1
 

@@ -10,7 +10,7 @@ git worktree add -d "$WORKSPACE_DIR"
 trap 'git worktree remove --force "$WORKSPACE_DIR"' EXIT
 
 gen_patches() {
-    local tektontask=test/resources/tektontask/tektontask.yaml
+    local tektontask=test/resources/files-to-check/tektontask.yaml
 
     cat << EOF >> "$tektontask"
 

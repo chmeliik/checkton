@@ -7,7 +7,7 @@
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/tektontask/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/cooltask.yaml",
                     "line": 40,
                     "column": 12,
                     "h_size": 41,
@@ -24,7 +24,7 @@
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/tektontask/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/cooltask.yaml",
                     "line": 40,
                     "column": 24,
                     "h_size": 1,
@@ -41,7 +41,7 @@
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/tektontask/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/cooltask.yaml",
                     "line": 34,
                     "column": 9,
                     "h_size": 29,
@@ -58,7 +58,7 @@
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/tektontask/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/cooltask.yaml",
                     "line": 29,
                     "column": 14,
                     "h_size": 7,
@@ -75,7 +75,7 @@
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/tektontask/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/cooltask.yaml",
                     "line": 27,
                     "column": 86,
                     "h_size": 12,
