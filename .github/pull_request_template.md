@@ -1,5 +1,3 @@
-### Description
-
 <!-- Briefly explain what the PR does and why. -->
 
 ### Checklist
