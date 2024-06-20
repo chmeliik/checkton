@@ -44,7 +44,9 @@ def list_shell_scripts(yamlfile: Path) -> list[InlineScript]:
         for i, line in enumerate(map(str.rstrip, f)):
             curr_indent = len(line) - len(line.lstrip())
 
-            if is_sh := is_shell(line, prev_nonempty_line):
+            if shell_indent is not None and (not line or curr_indent >= shell_indent):
+                scripts[-1].lines.append(line)
+            elif is_sh := is_shell(line, prev_nonempty_line):
                 shell_indent = curr_indent
                 if is_sh == "explicit":
                     initial_script_lines = [line]
@@ -58,8 +60,6 @@ def list_shell_scripts(yamlfile: Path) -> list[InlineScript]:
                 scripts.append(
                     InlineScript(initial_script_lines, line_offset, column_offset=curr_indent)
                 )
-            elif shell_indent is not None and (not line or curr_indent >= shell_indent):
-                scripts[-1].lines.append(line)
             else:
                 shell_indent = None
 

@@ -29,3 +29,7 @@ test_basic_checkton() {
 @test "checkton a Tekton YAML" {
     test_basic_checkton "$R/files-to-check/tektontask.yaml"
 }
+
+@test "checkton a YAML with a script nested in another script (in a heredoc)" {
+    test_basic_checkton "$R/files-to-check/nested-scripts.yaml"
+}

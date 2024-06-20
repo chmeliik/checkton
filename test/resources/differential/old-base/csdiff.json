@@ -50,6 +50,23 @@
                     "verbosity_level": 0
                 }
             ]
+        },
+        {
+            "checker": "SHELLCHECK_WARNING",
+            "language": "shell",
+            "tool": "shellcheck",
+            "key_event_idx": 0,
+            "events": [
+                {
+                    "file_name": "test/resources/files-to-check/nested-scripts.yaml",
+                    "line": 9,
+                    "column": 3,
+                    "h_size": 17,
+                    "event": "warning[SC2091]",
+                    "message": "Remove surrounding $() to avoid executing output (or use eval if intentional).",
+                    "verbosity_level": 0
+                }
+            ]
         }
     ]
 }

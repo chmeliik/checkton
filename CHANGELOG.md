@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Fixed
+
+- A script nested inside another script (e.g. inside a heredoc string) no longer
+  breaks the enclosing script
 
 ## [v0.1.0-alpha.2] - 2024-06-18
 

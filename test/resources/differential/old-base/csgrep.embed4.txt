@@ -25,3 +25,10 @@ test/resources/files-to-check/tektontask.yaml:27:86: warning[SC2154]: watery_tar
 #   28|         script: |+
 #   29|           eval $SCRIPT
 #   30|   
+
+Error: SHELLCHECK_WARNING:
+test/resources/files-to-check/nested-scripts.yaml:9:3: warning[SC2091]: Remove surrounding $() to avoid executing output (or use eval if intentional).
+#    6|     echo "$an_undefined_variable"
+#    7|     EOF
+#    8|     # this, however, should be reported
+#    9|->   $(bash script.sh)
