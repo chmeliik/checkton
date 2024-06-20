@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+# this block should be detected as a single script, the shebang in the heredoc shouldn't start a new script
+cat << 'EOF' > script.sh
+#!/bin/bash
+# this should not be reported (the heredoc is just a string)
+echo "$an_undefined_variable"
+EOF
+# this, however, should be reported
+$(bash script.sh)

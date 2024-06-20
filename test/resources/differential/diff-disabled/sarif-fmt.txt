@@ -28,5 +28,11 @@ warning: watery_tart is referenced but not assigned.
 27 │             echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
    │                                                                                      ^^^^^^^^^^^^
 
-warning: 4 warnings emitted
-error: 4 errors emitted
+warning: Remove surrounding $() to avoid executing output (or use eval if intentional).
+  ┌─ test/resources/files-to-check/nested-scripts.yaml:9:3
+  │
+9 │   $(bash script.sh)
+  │   ^^^^^^^^^^^^^^^^^
+
+warning: 5 warnings emitted
+error: 5 errors emitted

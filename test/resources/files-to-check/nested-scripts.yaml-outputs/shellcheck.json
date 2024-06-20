@@ -1,0 +1,15 @@
+{
+  "comments": [
+    {
+      "file": "test/resources/files-to-check/nested-scripts.yaml",
+      "line": 9,
+      "endLine": 9,
+      "column": 3,
+      "endColumn": 20,
+      "level": "warning",
+      "code": 2091,
+      "message": "Remove surrounding $() to avoid executing output (or use eval if intentional).",
+      "fix": null
+    }
+  ]
+}
