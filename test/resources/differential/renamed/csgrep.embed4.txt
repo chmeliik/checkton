@@ -1,5 +1,5 @@
 Error: SHELLCHECK_WARNING:
-test/resources/tektontask/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ ]] is undefined.
+test/resources/files-to-check/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ ]] is undefined.
 #   37|       - name: new-script
 #   38|         image: foo:latest
 #   39|         script: |
@@ -8,7 +8,7 @@ test/resources/tektontask/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ 
 #   42|           fi
 
 Error: SHELLCHECK_WARNING:
-test/resources/tektontask/cooltask.yaml:40:24: warning[SC2050]: This expression is constant. Did you forget the $ on a variable?
+test/resources/files-to-check/cooltask.yaml:40:24: warning[SC2050]: This expression is constant. Did you forget the $ on a variable?
 #   37|       - name: new-script
 #   38|         image: foo:latest
 #   39|         script: |

@@ -27,5 +27,5 @@ test_basic_checkton() {
 }
 
 @test "checkton a Tekton YAML" {
-    test_basic_checkton "$R/tektontask/tektontask.yaml"
+    test_basic_checkton "$R/files-to-check/tektontask.yaml"
 }

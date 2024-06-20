@@ -1,5 +1,5 @@
 Error: SHELLCHECK_WARNING:
-test/resources/tektontask/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ ]] is undefined.
+test/resources/files-to-check/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ ]] is undefined.
 #   37|       - name: new-script
 #   38|         image: foo:latest
 #   39|         script: |
@@ -8,7 +8,7 @@ test/resources/tektontask/cooltask.yaml:40:12: warning[SC3010]: In POSIX sh, [[ 
 #   42|           fi
 
 Error: SHELLCHECK_WARNING:
-test/resources/tektontask/cooltask.yaml:40:24: warning[SC2050]: This expression is constant. Did you forget the $ on a variable?
+test/resources/files-to-check/cooltask.yaml:40:24: warning[SC2050]: This expression is constant. Did you forget the $ on a variable?
 #   37|       - name: new-script
 #   38|         image: foo:latest
 #   39|         script: |
@@ -17,7 +17,7 @@ test/resources/tektontask/cooltask.yaml:40:24: warning[SC2050]: This expression 
 #   42|           fi
 
 Error: SHELLCHECK_WARNING:
-test/resources/tektontask/cooltask.yaml:34:9: error[SC2096]: On most OS, shebangs can only specify a single parameter.
+test/resources/files-to-check/cooltask.yaml:34:9: error[SC2096]: On most OS, shebangs can only specify a single parameter.
 #   31|       - name: script-with-broken-shebang
 #   32|         image: foo:latest
 #   33|         script: |-
@@ -27,7 +27,7 @@ test/resources/tektontask/cooltask.yaml:34:9: error[SC2096]: On most OS, shebang
 #   37|       - name: new-script
 
 Error: SHELLCHECK_WARNING:
-test/resources/tektontask/cooltask.yaml:29:14: info[SC2086]: Double quote to prevent globbing and word splitting.
+test/resources/files-to-check/cooltask.yaml:29:14: info[SC2086]: Double quote to prevent globbing and word splitting.
 #   26|   
 #   27|               echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
 #   28|         script: |+
@@ -37,7 +37,7 @@ test/resources/tektontask/cooltask.yaml:29:14: info[SC2086]: Double quote to pre
 #   32|         image: foo:latest
 
 Error: SHELLCHECK_WARNING:
-test/resources/tektontask/cooltask.yaml:27:86: warning[SC2154]: watery_tart is referenced but not assigned.
+test/resources/files-to-check/cooltask.yaml:27:86: warning[SC2154]: watery_tart is referenced but not assigned.
 #   24|               #!/usr/bin/env bash
 #   25|               set -euo pipefail
 #   26|   

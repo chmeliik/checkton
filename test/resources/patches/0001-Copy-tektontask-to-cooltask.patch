@@ -1,18 +1,18 @@
-From d3bd6f4326676c5a9ebdaed7b59fe0e1f594ba17 Mon Sep 17 00:00:00 2001
+From 5a61cf02226a8d97a8ae19f8a67b316cccbefc02 Mon Sep 17 00:00:00 2001
 From: Checkton Patcher <checkton-patcher@noreply.org>
-Date: Wed, 12 Jun 2024 10:11:52 +0200
+Date: Thu, 20 Jun 2024 16:01:22 +0200
 Subject: [PATCH] Copy tektontask to cooltask
 
 ---
- test/resources/tektontask/cooltask.yaml | 42 +++++++++++++++++++++++++
+ test/resources/files-to-check/cooltask.yaml | 42 +++++++++++++++++++++
  1 file changed, 42 insertions(+)
- create mode 100644 test/resources/tektontask/cooltask.yaml
+ create mode 100644 test/resources/files-to-check/cooltask.yaml
 
-diff --git a/test/resources/tektontask/cooltask.yaml b/test/resources/tektontask/cooltask.yaml
+diff --git a/test/resources/files-to-check/cooltask.yaml b/test/resources/files-to-check/cooltask.yaml
 new file mode 100644
 index 0000000..293c9b1
 --- /dev/null
-+++ b/test/resources/tektontask/cooltask.yaml
++++ b/test/resources/files-to-check/cooltask.yaml
 @@ -0,0 +1,42 @@
 +apiVersion: tekton.dev/v1
 +kind: Task

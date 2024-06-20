@@ -1,7 +1,7 @@
 {
   "comments": [
     {
-      "file": "test/resources/tektontask/tektontask.yaml",
+      "file": "test/resources/files-to-check/tektontask.yaml",
       "line": 34,
       "endLine": 34,
       "column": 9,
@@ -12,7 +12,7 @@
       "fix": null
     },
     {
-      "file": "test/resources/tektontask/tektontask.yaml",
+      "file": "test/resources/files-to-check/tektontask.yaml",
       "line": 29,
       "endLine": 29,
       "column": 14,
@@ -44,7 +44,7 @@
       }
     },
     {
-      "file": "test/resources/tektontask/tektontask.yaml",
+      "file": "test/resources/files-to-check/tektontask.yaml",
       "line": 27,
       "endLine": 27,
       "column": 86,
