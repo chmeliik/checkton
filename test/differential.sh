@@ -16,6 +16,8 @@ setup() {
 
     CHECKTON_DIFF_BASE=$(git rev-parse HEAD)
     export CHECKTON_DIFF_BASE
+
+    export CHECKTON_INCLUDE_REGEX='^test/.*\.ya?ml$'
 }
 
 teardown() {
