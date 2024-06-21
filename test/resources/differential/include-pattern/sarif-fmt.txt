@@ -1,11 +1,11 @@
 warning: In POSIX sh, [[ ]] is undefined.
-   ┌─ test/resources/files-to-check/cooltask.yaml:40:12
+   ┌─ test/resources/files-to-check/subdir/cooltask.yaml:40:12
    │
 40 │         if [[ violence = 'inherent in the system' ]]; then
    │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 warning: This expression is constant. Did you forget the $ on a variable?
-   ┌─ test/resources/files-to-check/cooltask.yaml:40:24
+   ┌─ test/resources/files-to-check/subdir/cooltask.yaml:40:24
    │
 40 │         if [[ violence = 'inherent in the system' ]]; then
    │                        ^
