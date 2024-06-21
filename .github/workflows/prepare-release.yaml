@@ -128,6 +128,8 @@ jobs:
           image_with_digest=${IMAGE}:${VERSION}@${DIGEST}
           sed -E "s;(\s*)image: .*;\1image: docker://$image_with_digest;" -i action.yaml
 
+          sed -E "s;uses: $GITHUB_REPOSITORY@.*;uses: $GITHUB_REPOSITORY@$VERSION;" -i README.md
+
           if [[ -z "$(git diff)" ]]; then
               echo "No changes applied. Is this version already released?" >&2
               exit 1
@@ -143,6 +145,7 @@ jobs:
           cat <<- EOF > /tmp/body.txt
           * Update the action image to \`$image_with_digest\`
           * Mark \`$VERSION\` as released in the CHANGELOG
+          * Update version tag in the usage example in the README
 
           You may wish to verify that the image is legit:
 
