@@ -1,6 +1,6 @@
-From fd54d9f8a8dfdca57d991fc36cfa4fc2ddf3b625 Mon Sep 17 00:00:00 2001
+From deadbeef01deadbeef02deadbeef03deadbeef04 Mon Sep 17 00:00:00 2001
 From: Checkton Patcher <checkton-patcher@noreply.org>
-Date: Thu, 20 Jun 2024 16:01:21 +0200
+Date: Thu, 20 Jun 2024 16:00:00 +0000
 Subject: [PATCH] Rename tektontask to cooltask
 
 ---
