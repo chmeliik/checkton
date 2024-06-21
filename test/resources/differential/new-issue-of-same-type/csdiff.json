@@ -4,16 +4,24 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
+            "hash_v1": "bb7ce503aa882be0504f50e12ccca66c2119129f",
             "key_event_idx": 0,
             "events": [
                 {
                     "file_name": "test/resources/files-to-check/tektontask.yaml",
-                    "line": 29,
+                    "line": 36,
                     "column": 14,
-                    "h_size": 7,
+                    "h_size": 3,
                     "event": "info[SC2086]",
                     "message": "Double quote to prevent globbing and word splitting.",
                     "verbosity_level": 0
+                },
+                {
+                    "file_name": "",
+                    "line": 0,
+                    "event": "#",
+                    "message": "   36|->         echo $HI",
+                    "verbosity_level": 1
                 }
             ]
         }

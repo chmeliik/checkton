@@ -147,6 +147,10 @@ checkton() {
     "${SCRIPTDIR}/checkton.py" "$@"
 }
 
+csgrep_embed() {
+    csgrep --mode=json --embed 1
+}
+
 main() {
     collect_file_pairs
 
@@ -167,7 +171,7 @@ main() {
         (
             at_ref "$BASE"
             dupe_renamed_and_copied_files
-            checkton "${all_files[@]}" > "$old_results"
+            checkton "${all_files[@]}" | csgrep_embed > "$old_results"
         )
     else
         touch "$old_results"
@@ -175,7 +179,7 @@ main() {
 
     (
         at_ref "$HEAD"
-        checkton "${new_files[@]}" > "$new_results"
+        checkton "${new_files[@]}" | csgrep_embed > "$new_results"
     )
 
     csdiff "$old_results" "$new_results"

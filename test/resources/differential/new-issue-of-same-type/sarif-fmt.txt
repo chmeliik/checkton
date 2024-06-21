@@ -1,7 +1,7 @@
 warning: Double quote to prevent globbing and word splitting.
-   ┌─ test/resources/files-to-check/tektontask.yaml:29:14
+   ┌─ test/resources/files-to-check/tektontask.yaml:36:14
    │
-29 │         eval $SCRIPT
-   │              ^^^^^^^
+36 │         echo $HI
+   │              ^^^
 
 warning: 1 warnings emitted
