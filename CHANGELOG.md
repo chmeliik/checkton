@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - A script nested inside another script (e.g. inside a heredoc string) no longer
   breaks the enclosing script
+- Introducing a ShellCheck violation into a file that already has a violation of
+  the same type could confuse Checkton, making it report the old violation instead
+  of the new one.
 
 ## [v0.1.0-alpha.2] - 2024-06-18
 

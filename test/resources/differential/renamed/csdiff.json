@@ -4,6 +4,7 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
+            "hash_v1": "e5d95fee317efc7ea546105d09f1a8ced5f54038",
             "key_event_idx": 0,
             "events": [
                 {
@@ -14,6 +15,13 @@
                     "event": "warning[SC3010]",
                     "message": "In POSIX sh, [[ ]] is undefined.",
                     "verbosity_level": 0
+                },
+                {
+                    "file_name": "",
+                    "line": 0,
+                    "event": "#",
+                    "message": "   40|->         if [[ violence = 'inherent in the system' ]]; then",
+                    "verbosity_level": 1
                 }
             ]
         },
@@ -21,6 +29,7 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
+            "hash_v1": "8877acfcffeed8d91b1e8b5936bc83b61bed0b92",
             "key_event_idx": 0,
             "events": [
                 {
@@ -31,6 +40,13 @@
                     "event": "warning[SC2050]",
                     "message": "This expression is constant. Did you forget the $ on a variable?",
                     "verbosity_level": 0
+                },
+                {
+                    "file_name": "",
+                    "line": 0,
+                    "event": "#",
+                    "message": "   40|->         if [[ violence = 'inherent in the system' ]]; then",
+                    "verbosity_level": 1
                 }
             ]
         }
