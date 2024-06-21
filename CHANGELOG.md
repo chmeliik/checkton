@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Fixed
+
+- The success/failure message did not make sense with `differential: false`, now
+  it's more generic
 
 ## [v0.1.0] - 2024-06-21
 
