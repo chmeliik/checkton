@@ -1,0 +1,9 @@
+Error: SHELLCHECK_WARNING:
+test/resources/files-to-check/tektontask.yaml:29:14: info[SC2086]: Double quote to prevent globbing and word splitting.
+#   26|   
+#   27|               echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
+#   28|         script: |+
+#   29|->         eval $SCRIPT
+#   30|   
+#   31|       - name: script-with-broken-shebang
+#   32|         image: foo:latest

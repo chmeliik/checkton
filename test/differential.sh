@@ -110,3 +110,8 @@ test_differential_checkton() {
     test_differential_checkton diff-disabled \
         "$R/patches/0001-Add-a-script-with-some-issues.patch"
 }
+
+@test "handling a new issue of the same type as one that's already present in the file" {
+    test_differential_checkton new-issue-of-same-type \
+        "$R/patches/0001-Add-another-unquoted-variable.patch"
+}

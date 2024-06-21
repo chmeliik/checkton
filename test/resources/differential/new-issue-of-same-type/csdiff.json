@@ -1,0 +1,21 @@
+{
+    "defects": [
+        {
+            "checker": "SHELLCHECK_WARNING",
+            "language": "shell",
+            "tool": "shellcheck",
+            "key_event_idx": 0,
+            "events": [
+                {
+                    "file_name": "test/resources/files-to-check/tektontask.yaml",
+                    "line": 29,
+                    "column": 14,
+                    "h_size": 7,
+                    "event": "info[SC2086]",
+                    "message": "Double quote to prevent globbing and word splitting.",
+                    "verbosity_level": 0
+                }
+            ]
+        }
+    ]
+}
