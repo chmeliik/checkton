@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+*Nothing yet.*
+
+## [v0.1.0] - 2024-06-21
+
 ### Fixed
 
 - A script nested inside another script (e.g. inside a heredoc string) no longer
@@ -30,4 +34,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [v0.1.0-alpha.1]: https://github.com/chmeliik/checkton/releases/tag/v0.1.0-alpha.1
 [v0.1.0-alpha.2]: https://github.com/chmeliik/checkton/compare/v0.1.0-alpha.1...v0.1.0-alpha.2
-[unreleased]: https://github.com/chmeliik/checkton/compare/v0.1.0-alpha.2...HEAD
+[v0.1.0]: https://github.com/chmeliik/checkton/compare/v0.1.0-alpha.2...v0.1.0
+[unreleased]: https://github.com/chmeliik/checkton/compare/v0.1.0...HEAD
