@@ -1,0 +1,7 @@
+warning: Double quote to prevent globbing and word splitting.
+   ┌─ test/resources/files-to-check/tektontask.yaml:29:14
+   │
+29 │         eval $SCRIPT
+   │              ^^^^^^^
+
+warning: 1 warnings emitted

@@ -24,6 +24,8 @@ EOF
 
     git add "$tektontask"
     _commit_and_save_patch "Add a script with some issues"
+    local add_script_ref
+    add_script_ref=$(git rev-parse HEAD)
 
     local cooltask=${tektontask%/*}/cooltask.yaml
     git mv "$tektontask" "$cooltask"
@@ -33,6 +35,11 @@ EOF
     git checkout -- "$tektontask"
     git add "$cooltask"
     _commit_and_save_patch "Copy tektontask to cooltask"
+
+    git revert --no-edit "$add_script_ref"
+    echo "        echo \$HI" >> "$tektontask"
+    git add "$tektontask"
+    _commit_and_save_patch "Add another unquoted variable"
 
     sed -i 's/^From [0-9a-f]*/From deadbeef01deadbeef02deadbeef03deadbeef04/' \
         test/resources/patches/*.patch
