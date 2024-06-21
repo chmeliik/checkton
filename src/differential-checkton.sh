@@ -138,6 +138,7 @@ dupe_renamed_and_copied_files() {
     for current_name in "${!FILE_PAIRS[@]}"; do
         old_name=${FILE_PAIRS[$current_name]}
         if [[ -n "$old_name" && "$old_name" != "$current_name" && ! -e "$current_name" ]]; then
+            mkdir -p "$(dirname "$current_name")"
             cp "$old_name" "$current_name"
         fi
     done

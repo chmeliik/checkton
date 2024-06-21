@@ -10,7 +10,8 @@ git worktree add -d "$WORKSPACE_DIR"
 trap 'git worktree remove --force "$WORKSPACE_DIR"' EXIT
 
 gen_patches() {
-    local tektontask=test/resources/files-to-check/tektontask.yaml
+    local tektontask_dir=test/resources/files-to-check
+    local tektontask=$tektontask_dir/tektontask.yaml
 
     cat << EOF >> "$tektontask"
 
@@ -27,13 +28,16 @@ EOF
     local add_script_ref
     add_script_ref=$(git rev-parse HEAD)
 
-    local cooltask=${tektontask%/*}/cooltask.yaml
+    local cooltask=${tektontask_dir}/cooltask.yaml
     git mv "$tektontask" "$cooltask"
     _commit_and_save_patch "Rename tektontask to cooltask"
 
+    local cooltask2=${tektontask_dir}/subdir/cooltask.yaml
     git reset HEAD^
     git checkout -- "$tektontask"
-    git add "$cooltask"
+    mkdir -p "$tektontask_dir/subdir"
+    cp "$tektontask" "$cooltask2"
+    git add "$cooltask2"
     _commit_and_save_patch "Copy tektontask to cooltask"
 
     git revert --no-edit "$add_script_ref"

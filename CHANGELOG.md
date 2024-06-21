@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Fixed
+
+- Moving/copying a file into a directory that did not exist in the base ref would
+  cause Checkton to fail when trying to copy the file
 
 ## [v0.1.1] - 2024-06-21
 

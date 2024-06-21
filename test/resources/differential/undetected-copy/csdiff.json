@@ -54,11 +54,11 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
-            "hash_v1": "e5d95fee317efc7ea546105d09f1a8ced5f54038",
+            "hash_v1": "cb9f1c3234e99556b69af0685544c56ae9bdf46e",
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/files-to-check/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/subdir/cooltask.yaml",
                     "line": 40,
                     "column": 12,
                     "h_size": 41,
@@ -79,11 +79,11 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
-            "hash_v1": "8877acfcffeed8d91b1e8b5936bc83b61bed0b92",
+            "hash_v1": "1046816acc2a9859ec6b631efef4825a89b3fe15",
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/files-to-check/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/subdir/cooltask.yaml",
                     "line": 40,
                     "column": 24,
                     "h_size": 1,
@@ -104,11 +104,11 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
-            "hash_v1": "d6c6e62f53afc94a13a0476bae48a82a2599bf07",
+            "hash_v1": "c60c157e478910f61a8b552e3c02df87e8ab92ad",
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/files-to-check/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/subdir/cooltask.yaml",
                     "line": 34,
                     "column": 9,
                     "h_size": 29,
@@ -129,11 +129,11 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
-            "hash_v1": "55c77778e5dacd2e739eb87732bfa8f8f091751d",
+            "hash_v1": "2d1ed2587276ee0eac3f2cef75562650a9e4f4ba",
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/files-to-check/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/subdir/cooltask.yaml",
                     "line": 29,
                     "column": 14,
                     "h_size": 7,
@@ -154,11 +154,11 @@
             "checker": "SHELLCHECK_WARNING",
             "language": "shell",
             "tool": "shellcheck",
-            "hash_v1": "c2dda3301c240486855f3ed2bf16b47072959ed6",
+            "hash_v1": "7895d64287e3c85f9bbcb8bc87d9f9843b0da82d",
             "key_event_idx": 0,
             "events": [
                 {
-                    "file_name": "test/resources/files-to-check/cooltask.yaml",
+                    "file_name": "test/resources/files-to-check/subdir/cooltask.yaml",
                     "line": 27,
                     "column": 86,
                     "h_size": 12,
