@@ -108,30 +108,18 @@ _should_diff_file() {
     esac
 }
 
-checkton_at_ref() {
+# NOTE: may change the PWD, best called in a subshell
+at_ref() {
     local ref=$1
     shift
 
     if [[ "$ref" != "$(git rev-parse HEAD)" ]]; then
-        local worktree=$WORKDIR/repo
-
-        if [[ ! -d "$worktree" ]]; then
-            # don't print unwanted fluff to stderr unless the command errors
-            _with_deferred_stderr git worktree add -d "$worktree" "$ref" >/dev/null
-        fi
-
-        (
-            cd "$worktree"
-            _with_deferred_stderr git checkout "$ref" >/dev/null
-            _checkton "$@"
-        )
-    else
-        _checkton "$@"
+        local worktree=$WORKDIR/repo-${ref}
+        # don't print unwanted fluff to stderr unless the command errors
+        _with_deferred_stderr git worktree add -d "$worktree" "$ref" >/dev/null
+        cd "$worktree"
+        _with_deferred_stderr git checkout "$ref" >/dev/null
     fi
-}
-
-_checkton() {
-    "${SCRIPTDIR}/checkton.py" "$@"
 }
 
 _with_deferred_stderr() {
@@ -145,36 +133,18 @@ _with_deferred_stderr() {
     return $rc
 }
 
-apply_renames() {
-    local results_file=$1
+dupe_renamed_and_copied_files() {
+    local current_name old_name
+    for current_name in "${!FILE_PAIRS[@]}"; do
+        old_name=${FILE_PAIRS[$current_name]}
+        if [[ -n "$old_name" && "$old_name" != "$current_name" && ! -e "$current_name" ]]; then
+            cp "$old_name" "$current_name"
+        fi
+    done
+}
 
-    local renames
-    renames=$(
-        for current_name in "${!FILE_PAIRS[@]}"; do
-            old_name=${FILE_PAIRS[$current_name]}
-            if [[ -n "$old_name" && "$old_name" != "$current_name" ]]; then
-                jq -n -c --arg old "$old_name" --arg new "$current_name" '{($old): $new}'
-            fi
-        done
-    )
-
-    if [[ -z "$renames" ]]; then
-        return
-    fi
-
-    local renames_map
-    renames_map=$(jq -c -s 'reduce .[] as $kv ({}; . * $kv)' <<< "$renames")
-
-    local updated
-    updated=$(
-        jq -c --argjson renames "$renames_map" '
-            . as $original
-            | .comments | map(select($renames[.file]) | .file |= $renames[.]) as $renamed_comments
-            | $original
-            | .comments += $renamed_comments
-        ' < "$results_file"
-    )
-    printf "%s\n" "$updated" > "$results_file"
+checkton() {
+    "${SCRIPTDIR}/checkton.py" "$@"
 }
 
 main() {
@@ -192,17 +162,21 @@ main() {
     local new_results=$WORKDIR/new.err
 
     if [[ ${#old_files[@]} -gt 0 ]]; then
-        checkton_at_ref "$BASE" "${old_files[@]}" > "$old_results"
+        local all_files
+        mapfile -t all_files < <(printf "%s\n" "${old_files[@]}" "${new_files[@]}" | sort -u)
+        (
+            at_ref "$BASE"
+            dupe_renamed_and_copied_files
+            checkton "${all_files[@]}" > "$old_results"
+        )
     else
         touch "$old_results"
     fi
 
-    checkton_at_ref "$HEAD" "${new_files[@]}" > "$new_results"
-
-    # For renamed/copied files, duplicate their comments (with the renamed filepath).
-    # This allows csdiff to diff the reports as if the copied/renamed files had already
-    # existed in the base ref (rather than treating such files as completely new).
-    apply_renames "$old_results"
+    (
+        at_ref "$HEAD"
+        checkton "${new_files[@]}" > "$new_results"
+    )
 
     csdiff "$old_results" "$new_results"
 }
