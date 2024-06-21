@@ -22,21 +22,28 @@ gen_patches() {
         fi
 EOF
 
-    commit_args=(--author "Checkton Patcher <checkton-patcher@noreply.org>")
-
     git add "$tektontask"
-    git commit "${commit_args[@]}" -m "Add a script with some issues"
-    git format-patch -1 -o test/resources/patches
+    _commit_and_save_patch "Add a script with some issues"
 
     local cooltask=${tektontask%/*}/cooltask.yaml
     git mv "$tektontask" "$cooltask"
-    git commit "${commit_args[@]}" -m "Rename tektontask to cooltask"
-    git format-patch -1 -o test/resources/patches
+    _commit_and_save_patch "Rename tektontask to cooltask"
 
     git reset HEAD^
     git checkout -- "$tektontask"
     git add "$cooltask"
-    git commit "${commit_args[@]}" -m "Copy tektontask to cooltask"
+    _commit_and_save_patch "Copy tektontask to cooltask"
+
+    sed -i 's/^From [0-9a-f]*/From deadbeef01deadbeef02deadbeef03deadbeef04/' \
+        test/resources/patches/*.patch
+}
+
+_commit_and_save_patch() {
+    local commit_args=(
+        --author "Checkton Patcher <checkton-patcher@noreply.org>"
+        --date "Thu, 20 Jun 2024 16:00:00 +0000"
+    )
+    git commit "${commit_args[@]}" -m "$1"
     git format-patch -1 -o test/resources/patches
 }
 
