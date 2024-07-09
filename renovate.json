@@ -16,7 +16,7 @@
     }
   ],
   "schedule": [
-    "every monday"
+    "before 4:00am on Monday"
   ],
   "git-submodules": {
     "enabled": true
