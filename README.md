@@ -53,8 +53,8 @@ jobs:
 
 ### `differential`
 
-Report new issues introduced in a Pull Request, ignore existing issues. Set to
-false to report all issues in all files.
+Report new violations introduced in a Pull Request, ignore existing violations.
+Set to false to report all violations in all files.
 
 * default: `true`
 
@@ -84,7 +84,7 @@ Hash of the latest commit in the Pull Request.
 
 ### `fail-on-findings`
 
-Fail when ShellCheck reports some findings? (May wish to set this to false if
+Fail when ShellCheck reports some violations? (May wish to set this to false if
 you're going to upload the SARIF report anyway. GitHub takes care of the
 reporting.)
 
@@ -114,7 +114,7 @@ git-diff manpage).
 
 ### `display-style`
 
-Display the findings in the specified style. Valid values: csgrep, sarif-fmt
+Display violations in the specified style. Valid values: csgrep, sarif-fmt
 
 * default: `sarif-fmt`
 
