@@ -7,29 +7,20 @@ if [[ -n "${GITHUB_WORKSPACE:-}" ]]; then
     git config --global --add safe.directory "$GITHUB_WORKSPACE"
 fi
 
-diff=$("$SCRIPTDIR"/differential-checkton.sh)
+"$SCRIPTDIR"/differential-checkton.sh > .checkton.sarif
+
 exitcode=0
 
-if [[ -z "$(csgrep <<< "$diff")" ]]; then
+if jq -e '[.runs[].results[]] | length == 0' < .checkton.sarif >/dev/null; then
     echo "✅ No ShellCheck warnings, congrats! \\o/"
 else
     echo "❌ Found ShellCheck warnings! /o\\"
-    csgrep --embed-context 4 <<< "$diff"
+    csgrep --embed-context 4 < .checkton.sarif
 
     if [[ "${CHECKTON_FAIL_ON_FINDINGS:-}" == "true" ]]; then
         exitcode=1
     fi
 fi
 
-shellcheck_version=$(shellcheck --version | awk '/version:/ { print $2 }')
-csgrep \
-    --mode=sarif \
-    --set-scan-prop="tool:ShellCheck" \
-    --set-scan-prop="tool-version:${shellcheck_version}" \
-    --set-scan-prop="tool-url:https://www.shellcheck.net/wiki/" \
-    <<< "$diff" \
-    > .checkton.sarif
-
 echo "sarif=.checkton.sarif" >> "${GITHUB_OUTPUT:-/dev/stdout}"
-
 exit $exitcode
