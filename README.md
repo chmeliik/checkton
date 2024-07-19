@@ -112,6 +112,12 @@ git-diff manpage).
 
 * default: `false`
 
+### `display-style`
+
+Display the findings in the specified style. Valid values: csgrep, sarif-fmt
+
+* default: `sarif-fmt`
+
 ## Outputs
 
 ### `sarif`

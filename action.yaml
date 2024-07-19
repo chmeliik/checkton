@@ -56,6 +56,11 @@ inputs:
        (See the git-diff manpage).
     required: false
     default: false
+  display-style:
+    description: >-
+      Display the findings in the specified style. Valid values: csgrep, sarif-fmt
+    default: sarif-fmt
+    required: false
 
 outputs:
   sarif:
@@ -74,3 +79,4 @@ runs:
     CHECKTON_FIND_RENAMES: ${{ inputs.find-renames }}
     CHECKTON_FIND_COPIES: ${{ inputs.find-copies }}
     CHECKTON_FIND_COPIES_HARDER: ${{ inputs.find-copies-harder }}
+    CHECKTON_DISPLAY_STYLE: ${{ inputs.display-style }}

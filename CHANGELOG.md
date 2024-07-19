@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Added
+
+- By default, Checkton now uses `sarif-fmt` to display violations
+  - Note that `sarif-fmt` also outputs the wiki link for each violation :tada:
+- A `display-style` option to allow switching back to `csgrep` to display violations
 
 ## [v0.1.2] - 2024-06-21
 
