@@ -25,7 +25,7 @@ jobs:
           image_without_digest=${image%@*}
           version=${image_without_digest##*:}
 
-          if [[ $tag != $version ]]; then
+          if [[ $tag != "$version" ]]; then
               echo "Tag does not match action.yaml image version: $tag X $image" >&2
               exit 1
           fi
