@@ -3,30 +3,45 @@ warning: In POSIX sh, [[ ]] is undefined.
    │
 40 │         if [[ violence = 'inherent in the system' ]]; then
    │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │
+   = SC3010
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC3010
 
 warning: This expression is constant. Did you forget the $ on a variable?
    ┌─ test/resources/files-to-check/cooltask.yaml:40:24
    │
 40 │         if [[ violence = 'inherent in the system' ]]; then
    │                        ^
+   │
+   = SC2050
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2050
 
 error: On most OS, shebangs can only specify a single parameter.
    ┌─ test/resources/files-to-check/cooltask.yaml:34:9
    │
 34 │         #!/bin/bash -e -u -o pipefail
    │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │
+   = SC2096
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2096
 
 warning: Double quote to prevent globbing and word splitting.
    ┌─ test/resources/files-to-check/cooltask.yaml:29:14
    │
 29 │         eval $SCRIPT
    │              ^^^^^^^
+   │
+   = SC2086
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086
 
 warning: watery_tart is referenced but not assigned.
    ┌─ test/resources/files-to-check/cooltask.yaml:27:86
    │
 27 │             echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
    │                                                                                      ^^^^^^^^^^^^
+   │
+   = SC2154
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2154
 
 warning: 4 warnings emitted
 error: 4 errors emitted

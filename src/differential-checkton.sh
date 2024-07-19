@@ -193,7 +193,14 @@ main() {
             --set-scan-prop="tool:ShellCheck" \
             --set-scan-prop="tool-version:${shellcheck_version}" \
             --set-scan-prop="tool-url:https://www.shellcheck.net/wiki/" |
-        jq
+        # inject ruleIndex properties so that sarif-fmt can show
+        # the shortDescription and fullDescription of each rule
+        jq '.runs[] |=
+            (
+                (.tool.driver.rules // [] | map(.id)) as $rule_ids |
+                .results[] |= (. as $result | .ruleIndex = ($rule_ids | index($result.ruleId)))
+            )
+        '
 }
 
 main

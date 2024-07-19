@@ -134,7 +134,8 @@
           "fingerprints": {
             "csdiff/v0": "0706aff8ce52b0dd3c7dba9b302d4dded4110372",
             "csdiff/v1": "cb9f1c3234e99556b69af0685544c56ae9bdf46e"
-          }
+          },
+          "ruleIndex": 1
         },
         {
           "ruleId": "SHELLCHECK_WARNING: warning[SC2050]",
@@ -210,7 +211,8 @@
           "fingerprints": {
             "csdiff/v0": "50b9f9b25a706afa6ece706f9ac21affca4ef96f",
             "csdiff/v1": "1046816acc2a9859ec6b631efef4825a89b3fe15"
-          }
+          },
+          "ruleIndex": 0
         }
       ]
     }

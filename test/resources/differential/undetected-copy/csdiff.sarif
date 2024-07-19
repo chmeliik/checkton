@@ -191,7 +191,8 @@
           "fingerprints": {
             "csdiff/v0": "a96cc3bc383adb9b93781dc09b85b0d9483826ea",
             "csdiff/v1": "e07aec91f8a692a71da7d0dd3f8774357e95e64f"
-          }
+          },
+          "ruleIndex": 4
         },
         {
           "ruleId": "SHELLCHECK_WARNING: warning[SC2050]",
@@ -267,7 +268,8 @@
           "fingerprints": {
             "csdiff/v0": "23e1bbfc08138871cc22f44416cd13aab6abbd86",
             "csdiff/v1": "a0dbfd8e936506d64f96536a972f8e67e428ab77"
-          }
+          },
+          "ruleIndex": 2
         },
         {
           "ruleId": "SHELLCHECK_WARNING: warning[SC3010]",
@@ -343,7 +345,8 @@
           "fingerprints": {
             "csdiff/v0": "0706aff8ce52b0dd3c7dba9b302d4dded4110372",
             "csdiff/v1": "cb9f1c3234e99556b69af0685544c56ae9bdf46e"
-          }
+          },
+          "ruleIndex": 4
         },
         {
           "ruleId": "SHELLCHECK_WARNING: warning[SC2050]",
@@ -419,7 +422,8 @@
           "fingerprints": {
             "csdiff/v0": "50b9f9b25a706afa6ece706f9ac21affca4ef96f",
             "csdiff/v1": "1046816acc2a9859ec6b631efef4825a89b3fe15"
-          }
+          },
+          "ruleIndex": 2
         },
         {
           "ruleId": "SHELLCHECK_WARNING: error[SC2096]",
@@ -495,7 +499,8 @@
           "fingerprints": {
             "csdiff/v0": "cd17a55289f4b1d17061493ba282297322bf81e7",
             "csdiff/v1": "c60c157e478910f61a8b552e3c02df87e8ab92ad"
-          }
+          },
+          "ruleIndex": 0
         },
         {
           "ruleId": "SHELLCHECK_WARNING: info[SC2086]",
@@ -570,7 +575,8 @@
           "fingerprints": {
             "csdiff/v0": "af818b1b70bc1235b458b72d493292d7295c9c32",
             "csdiff/v1": "2d1ed2587276ee0eac3f2cef75562650a9e4f4ba"
-          }
+          },
+          "ruleIndex": 1
         },
         {
           "ruleId": "SHELLCHECK_WARNING: warning[SC2154]",
@@ -646,7 +652,8 @@
           "fingerprints": {
             "csdiff/v0": "210286a9b20809ce9d29c563c0f3df3cc31259f5",
             "csdiff/v1": "7895d64287e3c85f9bbcb8bc87d9f9843b0da82d"
-          }
+          },
+          "ruleIndex": 3
         }
       ]
     }
