@@ -11,8 +11,8 @@ inputs:
   # inspired by https://github.com/redhat-plumbers-in-action/differential-shellcheck/blob/main/action.yml
   differential:
     description: >-
-      Report new issues introduced in a Pull Request, ignore existing issues.
-      Set to false to report all issues in all files.
+      Report new violations introduced in a Pull Request, ignore existing violations.
+      Set to false to report all violations in all files.
     required: false
     default: true
   include-regex:
@@ -33,7 +33,7 @@ inputs:
     default: ${{ github.event.pull_request.head.sha }}
   fail-on-findings:
     description: >-
-      Fail when ShellCheck reports some findings? (May wish to set this to false if you're
+      Fail when ShellCheck reports some violations? (May wish to set this to false if you're
       going to upload the SARIF report anyway. GitHub takes care of the reporting.)
     required: false
     default: true
@@ -58,7 +58,7 @@ inputs:
     default: false
   display-style:
     description: >-
-      Display the findings in the specified style. Valid values: csgrep, sarif-fmt
+      Display violations in the specified style. Valid values: csgrep, sarif-fmt
     default: sarif-fmt
     required: false
 
