@@ -3,11 +3,17 @@ warning: In POSIX sh, [[ ]] is undefined.
    │
 40 │         if [[ violence = 'inherent in the system' ]]; then
    │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │
+   = SC3010
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC3010
 
 warning: This expression is constant. Did you forget the $ on a variable?
    ┌─ test/resources/files-to-check/cooltask.yaml:40:24
    │
 40 │         if [[ violence = 'inherent in the system' ]]; then
    │                        ^
+   │
+   = SC2050
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2050
 
 warning: 2 warnings emitted

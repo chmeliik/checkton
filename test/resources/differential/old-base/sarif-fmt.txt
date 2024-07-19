@@ -3,24 +3,36 @@ error: On most OS, shebangs can only specify a single parameter.
    │
 34 │         #!/bin/bash -e -u -o pipefail
    │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │
+   = SC2096
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2096
 
 warning: Double quote to prevent globbing and word splitting.
    ┌─ test/resources/files-to-check/tektontask.yaml:29:14
    │
 29 │         eval $SCRIPT
    │              ^^^^^^^
+   │
+   = SC2086
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086
 
 warning: watery_tart is referenced but not assigned.
    ┌─ test/resources/files-to-check/tektontask.yaml:27:86
    │
 27 │             echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
    │                                                                                      ^^^^^^^^^^^^
+   │
+   = SC2154
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2154
 
 warning: Remove surrounding $() to avoid executing output (or use eval if intentional).
   ┌─ test/resources/files-to-check/nested-scripts.yaml:9:3
   │
 9 │   $(bash script.sh)
   │   ^^^^^^^^^^^^^^^^^
+  │
+  = SC2091
+  = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2091
 
 warning: 3 warnings emitted
 error: 3 errors emitted

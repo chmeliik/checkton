@@ -6,10 +6,6 @@ common_setup() {
     PATH="$PWD/src:$PATH"
 }
 
-csgrep_sarif_fmt() {
-    csgrep --mode=sarif | sarif-fmt --color never
-}
-
 assert_output_file() {
     local output=$1
     local expected_output_file=$2
@@ -28,6 +24,6 @@ test_human_readable_files() {
     run csgrep --embed 4 <<< "$csgrep_input"
     assert_output_file "$output" "$expected_files_dir/csgrep.embed4.txt"
 
-    run csgrep_sarif_fmt <<< "$csgrep_input"
+    run sarif-fmt --color never <<< "$csgrep_input"
     assert_output_file "$output" "$expected_files_dir/sarif-fmt.txt"
 }

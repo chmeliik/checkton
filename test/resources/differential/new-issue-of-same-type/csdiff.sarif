@@ -114,7 +114,8 @@
           "fingerprints": {
             "csdiff/v0": "820cfbe18ea61657f5d1b50aaa96ad3c8971485b",
             "csdiff/v1": "bb7ce503aa882be0504f50e12ccca66c2119129f"
-          }
+          },
+          "ruleIndex": 0
         }
       ]
     }

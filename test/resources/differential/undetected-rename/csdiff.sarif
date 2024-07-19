@@ -191,7 +191,8 @@
           "fingerprints": {
             "csdiff/v0": "710b4c3946e1993cc390f3a156207830c7a20421",
             "csdiff/v1": "e5d95fee317efc7ea546105d09f1a8ced5f54038"
-          }
+          },
+          "ruleIndex": 4
         },
         {
           "ruleId": "SHELLCHECK_WARNING: warning[SC2050]",
@@ -267,7 +268,8 @@
           "fingerprints": {
             "csdiff/v0": "efac8e5d9cd02a155271b301c2753e39d34c1480",
             "csdiff/v1": "8877acfcffeed8d91b1e8b5936bc83b61bed0b92"
-          }
+          },
+          "ruleIndex": 2
         },
         {
           "ruleId": "SHELLCHECK_WARNING: error[SC2096]",
@@ -343,7 +345,8 @@
           "fingerprints": {
             "csdiff/v0": "89c2469c5af3b85db04a9a4d7afb3b26fa337d43",
             "csdiff/v1": "d6c6e62f53afc94a13a0476bae48a82a2599bf07"
-          }
+          },
+          "ruleIndex": 0
         },
         {
           "ruleId": "SHELLCHECK_WARNING: info[SC2086]",
@@ -418,7 +421,8 @@
           "fingerprints": {
             "csdiff/v0": "6c9130358dffe6e19ef6c1b4675cce0d839c0e61",
             "csdiff/v1": "55c77778e5dacd2e739eb87732bfa8f8f091751d"
-          }
+          },
+          "ruleIndex": 1
         },
         {
           "ruleId": "SHELLCHECK_WARNING: warning[SC2154]",
@@ -494,7 +498,8 @@
           "fingerprints": {
             "csdiff/v0": "6484e8cadf387a454b796419979d81613151e0f3",
             "csdiff/v1": "c2dda3301c240486855f3ed2bf16b47072959ed6"
-          }
+          },
+          "ruleIndex": 3
         }
       ]
     }

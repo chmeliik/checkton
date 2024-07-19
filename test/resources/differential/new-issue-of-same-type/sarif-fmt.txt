@@ -3,5 +3,8 @@ warning: Double quote to prevent globbing and word splitting.
    │
 36 │         echo $HI
    │              ^^^
+   │
+   = SC2086
+   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086
 
 warning: 1 warnings emitted
