@@ -12,6 +12,9 @@ from pathlib import Path
 from typing import Literal, NamedTuple, TypedDict, assert_type
 
 
+re.match(r"^_(__|.)+_$", "foo")
+
+
 class InlineScript(NamedTuple):
     lines: list[str]
     line_offset: int
