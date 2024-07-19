@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "inlineExternalProperties": [
+    {
+      "externalizedProperties": {
+        "tool": "ShellCheck",
+        "tool-url": "https://www.shellcheck.net/wiki/",
+        "tool-version": "0.9.0"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "ShellCheck",
+          "version": "0.9.0",
+          "informationUri": "https://www.shellcheck.net/wiki/",
+          "rules": [
+            {
+              "id": "SHELLCHECK_WARNING: warning[SC2050]",
+              "properties": {
+                "tags": [
+                  "ShellCheck"
+                ]
+              },
+              "name": "SC2050",
+              "shortDescription": {
+                "text": "SC2050"
+              },
+              "help": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2050",
+                "markdown": "Defect reference: [SC2050](https://github.com/koalaman/shellcheck/wiki/SC2050)"
+              },
+              "fullDescription": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2050"
+              }
+            },
+            {
+              "id": "SHELLCHECK_WARNING: warning[SC3010]",
+              "properties": {
+                "tags": [
+                  "ShellCheck"
+                ]
+              },
+              "name": "SC3010",
+              "shortDescription": {
+                "text": "SC3010"
+              },
+              "help": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC3010",
+                "markdown": "Defect reference: [SC3010](https://github.com/koalaman/shellcheck/wiki/SC3010)"
+              },
+              "fullDescription": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC3010"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SHELLCHECK_WARNING: warning[SC3010]",
+          "level": "warning",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/tektontask.yaml"
+                },
+                "region": {
+                  "startLine": 40,
+                  "endLine": 40,
+                  "startColumn": 12,
+                  "endColumn": 53,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   40|->         if [[ violence = 'inherent in the system' ]]; then"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "In POSIX sh, [[ ]] is undefined."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/tektontask.yaml"
+                          },
+                          "region": {
+                            "startLine": 40,
+                            "endLine": 40,
+                            "startColumn": 12,
+                            "endColumn": 53
+                          }
+                        },
+                        "message": {
+                          "text": "In POSIX sh, [[ ]] is undefined."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "warning[SC3010]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   40|->         if [[ violence = 'inherent in the system' ]]; then"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "a96cc3bc383adb9b93781dc09b85b0d9483826ea",
+            "csdiff/v1": "e07aec91f8a692a71da7d0dd3f8774357e95e64f"
+          }
+        },
+        {
+          "ruleId": "SHELLCHECK_WARNING: warning[SC2050]",
+          "level": "warning",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/tektontask.yaml"
+                },
+                "region": {
+                  "startLine": 40,
+                  "endLine": 40,
+                  "startColumn": 24,
+                  "endColumn": 25,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   40|->         if [[ violence = 'inherent in the system' ]]; then"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "This expression is constant. Did you forget the $ on a variable?"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/tektontask.yaml"
+                          },
+                          "region": {
+                            "startLine": 40,
+                            "endLine": 40,
+                            "startColumn": 24,
+                            "endColumn": 25
+                          }
+                        },
+                        "message": {
+                          "text": "This expression is constant. Did you forget the $ on a variable?"
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "warning[SC2050]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   40|->         if [[ violence = 'inherent in the system' ]]; then"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "23e1bbfc08138871cc22f44416cd13aab6abbd86",
+            "csdiff/v1": "a0dbfd8e936506d64f96536a972f8e67e428ab77"
+          }
+        },
+        {
+          "ruleId": "SHELLCHECK_WARNING: warning[SC3010]",
+          "level": "warning",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/subdir/cooltask.yaml"
+                },
+                "region": {
+                  "startLine": 40,
+                  "endLine": 40,
+                  "startColumn": 12,
+                  "endColumn": 53,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   40|->         if [[ violence = 'inherent in the system' ]]; then"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "In POSIX sh, [[ ]] is undefined."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/subdir/cooltask.yaml"
+                          },
+                          "region": {
+                            "startLine": 40,
+                            "endLine": 40,
+                            "startColumn": 12,
+                            "endColumn": 53
+                          }
+                        },
+                        "message": {
+                          "text": "In POSIX sh, [[ ]] is undefined."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "warning[SC3010]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   40|->         if [[ violence = 'inherent in the system' ]]; then"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "0706aff8ce52b0dd3c7dba9b302d4dded4110372",
+            "csdiff/v1": "cb9f1c3234e99556b69af0685544c56ae9bdf46e"
+          }
+        },
+        {
+          "ruleId": "SHELLCHECK_WARNING: warning[SC2050]",
+          "level": "warning",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/subdir/cooltask.yaml"
+                },
+                "region": {
+                  "startLine": 40,
+                  "endLine": 40,
+                  "startColumn": 24,
+                  "endColumn": 25,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   40|->         if [[ violence = 'inherent in the system' ]]; then"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "This expression is constant. Did you forget the $ on a variable?"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/subdir/cooltask.yaml"
+                          },
+                          "region": {
+                            "startLine": 40,
+                            "endLine": 40,
+                            "startColumn": 24,
+                            "endColumn": 25
+                          }
+                        },
+                        "message": {
+                          "text": "This expression is constant. Did you forget the $ on a variable?"
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "warning[SC2050]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   40|->         if [[ violence = 'inherent in the system' ]]; then"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "50b9f9b25a706afa6ece706f9ac21affca4ef96f",
+            "csdiff/v1": "1046816acc2a9859ec6b631efef4825a89b3fe15"
+          }
+        }
+      ]
+    }
+  ]
+}

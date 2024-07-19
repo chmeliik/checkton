@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "inlineExternalProperties": [
+    {
+      "externalizedProperties": {
+        "tool": "ShellCheck",
+        "tool-url": "https://www.shellcheck.net/wiki/",
+        "tool-version": "0.9.0"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "ShellCheck",
+          "version": "0.9.0",
+          "informationUri": "https://www.shellcheck.net/wiki/",
+          "rules": [
+            {
+              "id": "SHELLCHECK_WARNING: info[SC2086]",
+              "properties": {
+                "tags": [
+                  "ShellCheck"
+                ]
+              },
+              "name": "SC2086",
+              "shortDescription": {
+                "text": "SC2086"
+              },
+              "help": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086",
+                "markdown": "Defect reference: [SC2086](https://github.com/koalaman/shellcheck/wiki/SC2086)"
+              },
+              "fullDescription": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SHELLCHECK_WARNING: info[SC2086]",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/tektontask.yaml"
+                },
+                "region": {
+                  "startLine": 36,
+                  "endLine": 36,
+                  "startColumn": 14,
+                  "endColumn": 17,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   36|->         echo $HI"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Double quote to prevent globbing and word splitting."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/tektontask.yaml"
+                          },
+                          "region": {
+                            "startLine": 36,
+                            "endLine": 36,
+                            "startColumn": 14,
+                            "endColumn": 17
+                          }
+                        },
+                        "message": {
+                          "text": "Double quote to prevent globbing and word splitting."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "info[SC2086]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   36|->         echo $HI"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "820cfbe18ea61657f5d1b50aaa96ad3c8971485b",
+            "csdiff/v1": "bb7ce503aa882be0504f50e12ccca66c2119129f"
+          }
+        }
+      ]
+    }
+  ]
+}

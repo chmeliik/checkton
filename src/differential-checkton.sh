@@ -183,7 +183,17 @@ main() {
         checkton "${new_files[@]}" | csgrep_embed > "$new_results"
     )
 
-    csdiff "$old_results" "$new_results"
+
+    local shellcheck_version
+    shellcheck_version=$(shellcheck --version | awk '/version:/ { print $2 }')
+
+    csdiff "$old_results" "$new_results" |
+        csgrep \
+            --mode=sarif \
+            --set-scan-prop="tool:ShellCheck" \
+            --set-scan-prop="tool-version:${shellcheck_version}" \
+            --set-scan-prop="tool-url:https://www.shellcheck.net/wiki/" |
+        jq
 }
 
 main

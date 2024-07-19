@@ -47,7 +47,7 @@ test_differential_checkton() {
 
     run differential_checkton
     local csdiff_output="$output"
-    assert_output_file "$csdiff_output" "$expected_files_dir/csdiff.json"
+    assert_output_file "$csdiff_output" "$expected_files_dir/csdiff.sarif"
 
     test_human_readable_files "$csdiff_output" "$expected_files_dir"
 }

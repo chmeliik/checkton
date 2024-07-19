@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "inlineExternalProperties": [
+    {
+      "externalizedProperties": {
+        "tool": "ShellCheck",
+        "tool-url": "https://www.shellcheck.net/wiki/",
+        "tool-version": "0.9.0"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "ShellCheck",
+          "version": "0.9.0",
+          "informationUri": "https://www.shellcheck.net/wiki/",
+          "rules": [
+            {
+              "id": "SHELLCHECK_WARNING: error[SC2096]",
+              "properties": {
+                "tags": [
+                  "ShellCheck"
+                ]
+              },
+              "name": "SC2096",
+              "shortDescription": {
+                "text": "SC2096"
+              },
+              "help": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2096",
+                "markdown": "Defect reference: [SC2096](https://github.com/koalaman/shellcheck/wiki/SC2096)"
+              },
+              "fullDescription": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2096"
+              }
+            },
+            {
+              "id": "SHELLCHECK_WARNING: info[SC2086]",
+              "properties": {
+                "tags": [
+                  "ShellCheck"
+                ]
+              },
+              "name": "SC2086",
+              "shortDescription": {
+                "text": "SC2086"
+              },
+              "help": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086",
+                "markdown": "Defect reference: [SC2086](https://github.com/koalaman/shellcheck/wiki/SC2086)"
+              },
+              "fullDescription": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086"
+              }
+            },
+            {
+              "id": "SHELLCHECK_WARNING: warning[SC2091]",
+              "properties": {
+                "tags": [
+                  "ShellCheck"
+                ]
+              },
+              "name": "SC2091",
+              "shortDescription": {
+                "text": "SC2091"
+              },
+              "help": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2091",
+                "markdown": "Defect reference: [SC2091](https://github.com/koalaman/shellcheck/wiki/SC2091)"
+              },
+              "fullDescription": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2091"
+              }
+            },
+            {
+              "id": "SHELLCHECK_WARNING: warning[SC2154]",
+              "properties": {
+                "tags": [
+                  "ShellCheck"
+                ]
+              },
+              "name": "SC2154",
+              "shortDescription": {
+                "text": "SC2154"
+              },
+              "help": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2154",
+                "markdown": "Defect reference: [SC2154](https://github.com/koalaman/shellcheck/wiki/SC2154)"
+              },
+              "fullDescription": {
+                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2154"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SHELLCHECK_WARNING: error[SC2096]",
+          "level": "error",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/tektontask.yaml"
+                },
+                "region": {
+                  "startLine": 34,
+                  "endLine": 34,
+                  "startColumn": 9,
+                  "endColumn": 38,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   34|->         #!/bin/bash -e -u -o pipefail"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "On most OS, shebangs can only specify a single parameter."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/tektontask.yaml"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "endLine": 34,
+                            "startColumn": 9,
+                            "endColumn": 38
+                          }
+                        },
+                        "message": {
+                          "text": "On most OS, shebangs can only specify a single parameter."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "error[SC2096]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   34|->         #!/bin/bash -e -u -o pipefail"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "bb6f3e9cc90f6c63863055329a5c3a780ab8f577",
+            "csdiff/v1": "8a744b663ce36a3d31f7ff5171212082039783df"
+          }
+        },
+        {
+          "ruleId": "SHELLCHECK_WARNING: info[SC2086]",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/tektontask.yaml"
+                },
+                "region": {
+                  "startLine": 29,
+                  "endLine": 29,
+                  "startColumn": 14,
+                  "endColumn": 21,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   29|->         eval $SCRIPT"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Double quote to prevent globbing and word splitting."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/tektontask.yaml"
+                          },
+                          "region": {
+                            "startLine": 29,
+                            "endLine": 29,
+                            "startColumn": 14,
+                            "endColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "Double quote to prevent globbing and word splitting."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "info[SC2086]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   29|->         eval $SCRIPT"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "820cfbe18ea61657f5d1b50aaa96ad3c8971485b",
+            "csdiff/v1": "169d75b8bc451acb8bc08667ca76eb11bab15712"
+          }
+        },
+        {
+          "ruleId": "SHELLCHECK_WARNING: warning[SC2154]",
+          "level": "warning",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/tektontask.yaml"
+                },
+                "region": {
+                  "startLine": 27,
+                  "endLine": 27,
+                  "startColumn": 86,
+                  "endColumn": 98,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n   27|->             echo \"You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!\""
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "watery_tart is referenced but not assigned."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/tektontask.yaml"
+                          },
+                          "region": {
+                            "startLine": 27,
+                            "endLine": 27,
+                            "startColumn": 86,
+                            "endColumn": 98
+                          }
+                        },
+                        "message": {
+                          "text": "watery_tart is referenced but not assigned."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "warning[SC2154]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "   27|->             echo \"You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!\""
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "03d5203c6574e015b102233a45aa9643ddec7698",
+            "csdiff/v1": "980692cf15515f28eedb92c5057f9ad46c8bd896"
+          }
+        },
+        {
+          "ruleId": "SHELLCHECK_WARNING: warning[SC2091]",
+          "level": "warning",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/nested-scripts.yaml"
+                },
+                "region": {
+                  "startLine": 9,
+                  "endLine": 9,
+                  "startColumn": 3,
+                  "endColumn": 20,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n    9|->   $(bash script.sh)"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Remove surrounding $() to avoid executing output (or use eval if intentional)."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/nested-scripts.yaml"
+                          },
+                          "region": {
+                            "startLine": 9,
+                            "endLine": 9,
+                            "startColumn": 3,
+                            "endColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "Remove surrounding $() to avoid executing output (or use eval if intentional)."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "warning[SC2091]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "    9|->   $(bash script.sh)"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "f596833990c7954fa147a9fcbc649d3bb962b407",
+            "csdiff/v1": "e3d4958b1d02857927f75149c080822cddeb9da6"
+          }
+        }
+      ]
+    }
+  ]
+}
