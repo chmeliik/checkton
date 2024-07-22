@@ -119,3 +119,8 @@ test_differential_checkton() {
 @test "generating an empty SARIF when there are no files to check" {
     test_differential_checkton no-files-to-check
 }
+
+@test "generating an empty SARIF when there files to check but no new issues" {
+    test_differential_checkton no-new-issues \
+        "$R/patches/0001-Rename-tektontask-to-cooltask.patch"
+}
