@@ -159,12 +159,17 @@ main() {
     mapfile -t old_files < <(printf "%s\n" "${FILE_PAIRS[@]}" | sed '/^$/d')
     local new_files=("${!FILE_PAIRS[@]}")
 
-    if [[ "${#new_files[@]}" -eq 0 ]]; then
-        return
-    fi
-
     local old_results=$WORKDIR/old.err
     local new_results=$WORKDIR/new.err
+
+    if [[ "${#new_files[@]}" -gt 0 ]]; then
+        (
+            at_ref "$HEAD"
+            checkton "${new_files[@]}" | csgrep_embed > "$new_results"
+        )
+    else
+        touch "$new_results"
+    fi
 
     if [[ ${#old_files[@]} -gt 0 ]]; then
         local all_files
@@ -177,12 +182,6 @@ main() {
     else
         touch "$old_results"
     fi
-
-    (
-        at_ref "$HEAD"
-        checkton "${new_files[@]}" | csgrep_embed > "$new_results"
-    )
-
 
     local shellcheck_version
     shellcheck_version=$(shellcheck --version | awk '/version:/ { print $2 }')

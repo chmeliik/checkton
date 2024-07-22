@@ -115,3 +115,7 @@ test_differential_checkton() {
     test_differential_checkton new-issue-of-same-type \
         "$R/patches/0001-Add-another-unquoted-variable.patch"
 }
+
+@test "generating an empty SARIF when there are no files to check" {
+    test_differential_checkton no-files-to-check
+}
