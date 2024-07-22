@@ -68,7 +68,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/chmeliik/checkton:v0.2.0@sha256:1f7d4c6546fa8cf70563b943ce31d865a09c54f84b28a271fd46145b441ab3f0
+  image: docker://ghcr.io/chmeliik/checkton:v0.2.1@sha256:d4bdbf75c7e17415c6c96eeee8930fb27e5dd976092ee74c3db545086ef5003c
   env:
     CHECKTON_DIFFERENTIAL: ${{ inputs.differential }}
     CHECKTON_INCLUDE_REGEX: ${{ inputs.include-regex }}
