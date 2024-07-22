@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Fixed
+
+- In v0.2.0, Checkton would always fail when there were no files to check /o\\
+  - And also erroneously reported that there were ShellCheck warnings
 
 ## [v0.2.0] - 2024-07-19
 
