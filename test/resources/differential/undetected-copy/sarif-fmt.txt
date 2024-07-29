@@ -62,4 +62,4 @@ warning: watery_tart is referenced but not assigned.
    = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2154
 
 warning: 6 warnings emitted
-error: 6 errors emitted
+error: 1 errors emitted

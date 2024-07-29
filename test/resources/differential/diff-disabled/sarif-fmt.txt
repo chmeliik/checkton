@@ -53,4 +53,4 @@ warning: Remove surrounding $() to avoid executing output (or use eval if intent
   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2091
 
 warning: 5 warnings emitted
-error: 5 errors emitted
+error: 1 errors emitted
