@@ -34,7 +34,7 @@ jobs:
 
       - name: Run Checkton
         id: checkton
-        uses: chmeliik/checkton@v0.2.1
+        uses: chmeliik/checkton@v0.2.2
         with:
           # Let there be green. GitHub's code scanning will do the reporting.
           fail-on-findings: false
