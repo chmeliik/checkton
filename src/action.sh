@@ -15,8 +15,9 @@ checkout() {
 }
 
 if [[ -n "${CHECKTON_DIFF_HEAD:-}" ]]; then
+    current_ref=$(git rev-parse HEAD)
     checkout "$CHECKTON_DIFF_HEAD"
-    trap 'checkout -' EXIT
+    trap 'checkout $current_ref' EXIT
 fi
 
 "$SCRIPTDIR"/differential-checkton.sh > .checkton.sarif
