@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Fixed
+
+- Run the formatter (`csgrep` or `sarif-fmt`) at the correct git ref
+  - Before, Checkton would run the analysis at the specified commit but would
+    then run the formatter at HEAD, potentially resulting in incorrect output.
 
 ## [v0.2.1] - 2024-07-22
 
