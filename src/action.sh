@@ -7,6 +7,18 @@ if [[ -n "${GITHUB_WORKSPACE:-}" ]]; then
     git config --global --add safe.directory "$GITHUB_WORKSPACE"
 fi
 
+checkout() {
+    if ! stderr=$(git checkout "$@" 2>&1 1>/dev/null); then
+        printf "%s\n" "$stderr" >&2
+        return 1
+    fi
+}
+
+if [[ -n "${CHECKTON_DIFF_HEAD:-}" ]]; then
+    checkout "$CHECKTON_DIFF_HEAD"
+    trap 'checkout -' EXIT
+fi
+
 "$SCRIPTDIR"/differential-checkton.sh > .checkton.sarif
 
 exitcode=0
