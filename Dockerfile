@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora-minimal:40@sha256:c92a2dc08a2cab2d6dceb22bb099771d538c6bd9dc0fa810e89b0947ac6acc40
+FROM registry.fedoraproject.org/fedora-minimal:40@sha256:43c0d8b1ddf8929b25b9c320b2f20fbc96c8974c901b1bd9b92c1cb7893f6b26
 
 # This image is also used to run tests, ncurses is needed for nicer output
 ARG INSTALL_NCURSES=false
