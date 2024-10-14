@@ -49,7 +49,7 @@ jobs:
             ${{ inputs.version }}
 
       - name: Generate SBOM
-        uses: anchore/sbom-action@61119d458adab75f756bc0b9e4bde25725f86a7a # v0
+        uses: anchore/sbom-action@f5e124a5e5e1d497a692818ae907d3c45829d033 # v0
         with:
           image: ${{ env.IMAGE }}:${{ github.sha }}
           format: cyclonedx-json
