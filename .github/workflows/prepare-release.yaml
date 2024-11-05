@@ -49,7 +49,7 @@ jobs:
             ${{ inputs.version }}
 
       - name: Generate SBOM
-        uses: anchore/sbom-action@251a468eed47e5082b105c3ba6ee500c0e65a764 # v0
+        uses: anchore/sbom-action@fc46e51fd3cb168ffb36c6d1915723c47db58abb # v0
         with:
           image: ${{ env.IMAGE }}:${{ github.sha }}
           format: cyclonedx-json
@@ -75,7 +75,7 @@ jobs:
             ${{ inputs.version }}
 
       - name: Generate image attestation
-        uses: actions/attest-build-provenance@1c608d11d69870c2092266b3f9a6f3abbf17002c # v1
+        uses: actions/attest-build-provenance@ef244123eb79f2f7a7e75d99086184180e6d0018 # v1
         with:
           subject-name: ${{ env.IMAGE }}
           subject-digest: ${{ steps.push.outputs.digest }}
