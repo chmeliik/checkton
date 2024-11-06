@@ -1,0 +1,6 @@
+Error: SHELLCHECK_WARNING:
+test/resources/files-to-check/busybox-sh.yaml:4:8: info[SC2086]: Double quote to prevent globbing and word splitting.
+#    1|   some_attribute: |
+#    2|     #!/bin/busybox sh
+#    3|   
+#    4|->   echo $HELLO_THERE

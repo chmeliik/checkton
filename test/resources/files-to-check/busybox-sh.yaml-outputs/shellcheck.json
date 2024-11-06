@@ -1,0 +1,36 @@
+{
+  "comments": [
+    {
+      "file": "test/resources/files-to-check/busybox-sh.yaml",
+      "line": 4,
+      "endLine": 4,
+      "column": 8,
+      "endColumn": 20,
+      "level": "info",
+      "code": 2086,
+      "message": "Double quote to prevent globbing and word splitting.",
+      "fix": {
+        "replacements": [
+          {
+            "column": 8,
+            "endColumn": 8,
+            "endLine": 4,
+            "insertionPoint": "afterEnd",
+            "line": 4,
+            "precedence": 7,
+            "replacement": "\""
+          },
+          {
+            "column": 20,
+            "endColumn": 20,
+            "endLine": 4,
+            "insertionPoint": "beforeStart",
+            "line": 4,
+            "precedence": 7,
+            "replacement": "\""
+          }
+        ]
+      }
+    }
+  ]
+}
