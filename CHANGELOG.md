@@ -7,7 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Added
+
+- Detection of `busybox sh` scripts
+
+### Changed
+
+- Update base image for GitHub action to Fedora 41
+  - Which comes with [ShellCheck v0.10.0][shellcheck-v010], which adds support
+    for `busybox sh`
+
+[shellcheck-v010]: https://github.com/koalaman/shellcheck/blob/master/CHANGELOG.md#v0100---2024-03-07
 
 ## [v0.2.2] - 2024-07-29
 
