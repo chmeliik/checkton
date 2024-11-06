@@ -1,1 +1,7 @@
-Error: missing field `runs` at line 36 column 1
+warning: Double quote to prevent globbing and word splitting.
+  ┌─ test/resources/files-to-check/busybox-sh.yaml:4:8
+  │
+4 │   echo $HELLO_THERE
+  │        ^^^^^^^^^^^^
+
+warning: 1 warnings emitted
