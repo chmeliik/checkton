@@ -1,1 +1,7 @@
-Error: missing field `runs` at line 15 column 1
+warning: Remove surrounding $() to avoid executing output (or use eval if intentional).
+  ┌─ test/resources/files-to-check/nested-scripts.yaml:9:3
+  │
+9 │   $(bash script.sh)
+  │   ^^^^^^^^^^^^^^^^^
+
+warning: 1 warnings emitted

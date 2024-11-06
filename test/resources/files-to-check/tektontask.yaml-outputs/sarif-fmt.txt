@@ -1,1 +1,20 @@
-Error: missing field `runs` at line 58 column 1
+error: On most OS, shebangs can only specify a single parameter.
+   ┌─ test/resources/files-to-check/tektontask.yaml:34:9
+   │
+34 │         #!/bin/bash -e -u -o pipefail
+   │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: Double quote to prevent globbing and word splitting.
+   ┌─ test/resources/files-to-check/tektontask.yaml:29:14
+   │
+29 │         eval $SCRIPT
+   │              ^^^^^^^
+
+warning: watery_tart is referenced but not assigned.
+   ┌─ test/resources/files-to-check/tektontask.yaml:27:86
+   │
+27 │             echo "You can't expect to wield supreme executive power just 'cause some $watery_tart threw a sword at you!"
+   │                                                                                      ^^^^^^^^^^^^
+
+warning: 2 warnings emitted
+error: 1 errors emitted

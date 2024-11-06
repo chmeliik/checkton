@@ -24,6 +24,17 @@ test_human_readable_files() {
     run csgrep --embed 4 <<< "$csgrep_input"
     assert_output_file "$output" "$expected_files_dir/csgrep.embed4.txt"
 
-    run sarif-fmt --color never <<< "$csgrep_input"
+    local input_is_sarif
+    input_is_sarif=$(
+        jq '.["$schema"] and (.["$schema"] | test("sarif-.*\\.json$"))' <<< "$csgrep_input"
+    )
+    local sarif
+    if [[ $input_is_sarif == true ]]; then
+        sarif=$csgrep_input
+    else
+        sarif=$(csgrep --mode=sarif <<< "$csgrep_input")
+    fi
+
+    run sarif-fmt --color never <<< "$sarif"
     assert_output_file "$output" "$expected_files_dir/sarif-fmt.txt"
 }
