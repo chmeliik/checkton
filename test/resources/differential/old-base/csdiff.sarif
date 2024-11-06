@@ -404,6 +404,82 @@
             "csdiff/v1": "e3d4958b1d02857927f75149c080822cddeb9da6"
           },
           "ruleIndex": 2
+        },
+        {
+          "ruleId": "SHELLCHECK_WARNING: info[SC2086]",
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "test/resources/files-to-check/busybox-sh.yaml"
+                },
+                "region": {
+                  "startLine": 4,
+                  "endLine": 4,
+                  "startColumn": 8,
+                  "endColumn": 20,
+                  "snippet": {
+                    "text": "Problem detected in this context:\n    4|->   echo $HELLO_THERE"
+                  }
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "Double quote to prevent globbing and word splitting."
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "test/resources/files-to-check/busybox-sh.yaml"
+                          },
+                          "region": {
+                            "startLine": 4,
+                            "endLine": 4,
+                            "startColumn": 8,
+                            "endColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "Double quote to prevent globbing and word splitting."
+                        }
+                      },
+                      "nestingLevel": 0,
+                      "kinds": [
+                        "info[SC2086]"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ""
+                }
+              },
+              "message": {
+                "text": "    4|->   echo $HELLO_THERE"
+              }
+            }
+          ],
+          "fingerprints": {
+            "csdiff/v0": "506349c4a0820343cc06ef480f631a70818e93d8",
+            "csdiff/v1": "2f736dfa54eddf586bf89292fd1aa98fd15fcd11"
+          },
+          "ruleIndex": 1
         }
       ]
     }

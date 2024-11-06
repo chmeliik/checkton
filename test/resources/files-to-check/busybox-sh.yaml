@@ -1,0 +1,4 @@
+some_attribute: |
+  #!/bin/busybox sh
+
+  echo $HELLO_THERE

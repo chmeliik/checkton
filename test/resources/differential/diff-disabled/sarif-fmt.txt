@@ -52,5 +52,14 @@ warning: Remove surrounding $() to avoid executing output (or use eval if intent
   = SC2091
   = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2091
 
-warning: 5 warnings emitted
+warning: Double quote to prevent globbing and word splitting.
+  ┌─ test/resources/files-to-check/busybox-sh.yaml:4:8
+  │
+4 │   echo $HELLO_THERE
+  │        ^^^^^^^^^^^^
+  │
+  = SC2086
+  = Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2086
+
+warning: 6 warnings emitted
 error: 1 errors emitted
