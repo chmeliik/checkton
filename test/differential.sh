@@ -124,3 +124,19 @@ test_differential_checkton() {
     test_differential_checkton no-new-issues \
         "$R/patches/0001-Rename-tektontask-to-cooltask.patch"
 }
+
+@test "don't report issues already fixed in target branch but still present in source branch" {
+    git am "$R/patches/0001-Add-another-unquoted-variable.patch"
+
+    # the issue got fixed in the target branch
+    git revert HEAD --no-edit
+    local diff_base
+    diff_base=$(git rev-parse HEAD)
+
+    # but our source branch forked from a point before the issue was fixed
+    git checkout HEAD^ -b source-branch
+    git am "$R/patches/0001-Modify-without-introducing-issues.patch"
+
+    CHECKTON_DIFF_BASE=$diff_base \
+    test_differential_checkton dont-report-stale-issues
+}
