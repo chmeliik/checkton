@@ -5,6 +5,7 @@ SCRIPTDIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
 BASE=${CHECKTON_DIFF_BASE:-$(git rev-parse main)}
 HEAD=${CHECKTON_DIFF_HEAD:-$(git rev-parse HEAD)}
+MERGE_BASE=$(git merge-base "$BASE" "$HEAD")
 
 DIFF_ARGS=(--diff-filter=d)
 if [[ "${CHECKTON_FIND_RENAMES:-}" != "false" ]]; then
@@ -71,14 +72,14 @@ collect_file_pairs() {
 
         # print the full status of each file
         echo "  $line" >&2
-    done < <(git diff --name-status "${DIFF_ARGS[@]}" "${BASE}...${HEAD}")
+    done < <(git diff --name-status "${DIFF_ARGS[@]}" "${MERGE_BASE}...${HEAD}")
 }
 
 _ls_files_to_check() {
     if [[ "$DIFFERENTIAL" == "false" ]]; then
         git ls-tree -r --name-only "$HEAD"
     else
-        git diff --name-only "${DIFF_ARGS[@]}" "${BASE}...${HEAD}"
+        git diff --name-only "${DIFF_ARGS[@]}" "${MERGE_BASE}...${HEAD}"
     fi | _apply_include_exlude_patterns | sort -u
 }
 
@@ -175,7 +176,7 @@ main() {
         local all_files
         mapfile -t all_files < <(printf "%s\n" "${old_files[@]}" "${new_files[@]}" | sort -u)
         (
-            at_ref "$BASE"
+            at_ref "$MERGE_BASE"
             dupe_renamed_and_copied_files
             checkton "${all_files[@]}" | csgrep_embed > "$old_results"
         )
