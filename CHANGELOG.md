@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+*Nothing yet.*
+
+## [v0.3.1] - 2024-11-20
+
 ### Fixed
 
 - If a target branch for a PR contained fixes that the source branch did not
@@ -101,4 +105,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.2.1]: https://github.com/chmeliik/checkton/compare/v0.2.0...v0.2.1
 [v0.2.2]: https://github.com/chmeliik/checkton/compare/v0.2.1...v0.2.2
 [v0.3.0]: https://github.com/chmeliik/checkton/compare/v0.2.2...v0.3.0
-[unreleased]: https://github.com/chmeliik/checkton/compare/v0.3.0...HEAD
+[v0.3.1]: https://github.com/chmeliik/checkton/compare/v0.3.0...v0.3.1
+[unreleased]: https://github.com/chmeliik/checkton/compare/v0.3.1...HEAD
