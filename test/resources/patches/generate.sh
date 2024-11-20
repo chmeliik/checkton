@@ -45,6 +45,10 @@ EOF
     git add "$tektontask"
     _commit_and_save_patch "Add another unquoted variable"
 
+    echo "status: {}" >> "$tektontask"
+    git add "$tektontask"
+    _commit_and_save_patch "Modify without introducing issues"
+
     sed -i 's/^From [0-9a-f]*/From deadbeef01deadbeef02deadbeef03deadbeef04/' \
         test/resources/patches/*.patch
 
