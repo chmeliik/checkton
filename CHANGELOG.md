@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Fixed
+
+- If a target branch for a PR contained fixes that the source branch did not
+  (because the source branch wasn't fully rebased onto the target branch), Checkton
+  would report that the PR is introducing issues
+  - Fix by diffing against the original fork point of (source X target) rather than
+    diffing against the HEAD of the target
 
 ## [v0.3.0] - 2024-11-06
 
