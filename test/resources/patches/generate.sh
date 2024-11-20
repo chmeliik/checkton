@@ -47,6 +47,12 @@ EOF
 
     sed -i 's/^From [0-9a-f]*/From deadbeef01deadbeef02deadbeef03deadbeef04/' \
         test/resources/patches/*.patch
+
+    local git_version
+    git_version=$(git --version | cut -d ' ' -f 3)
+    # no special meaning to 2.45.1, it was just the version used when the first patch was generated
+    sed -i "s/$git_version/2.45.1/" \
+        test/resources/patches/*.patch
 }
 
 _commit_and_save_patch() {
