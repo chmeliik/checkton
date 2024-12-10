@@ -75,14 +75,14 @@ jobs:
             ${{ inputs.version }}
 
       - name: Generate image attestation
-        uses: actions/attest-build-provenance@ef244123eb79f2f7a7e75d99086184180e6d0018 # v1
+        uses: actions/attest-build-provenance@7668571508540a607bdfd90a87a560489fe372eb # v2
         with:
           subject-name: ${{ env.IMAGE }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
       - name: Generate SBOM attestation
-        uses: actions/attest-sbom@5026d3663739160db546203eeaffa6aa1c51a4d6 # v1
+        uses: actions/attest-sbom@cbfd0027ae731a5892db25ecd226930d7ffd19eb # v2
         with:
           subject-name: ${{ env.IMAGE }}
           subject-digest: ${{ steps.push.outputs.digest }}
