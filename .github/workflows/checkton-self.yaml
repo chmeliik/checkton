@@ -28,6 +28,31 @@ jobs:
           differential: false
           fail-on-findings: false
 
+      - name: Inject rules into the SARIF file
+        run: |
+          jq < .checkton.sarif '.runs[].tool.driver.rules = [
+                        {
+                            "id": "SHELLCHECK_WARNING: warning[SC2053]",
+                            "properties": {
+                                "tags": [
+                                    "ShellCheck"
+                                ]
+                            },
+                            "name": "SC2053",
+                            "shortDescription": {
+                                "text": "SC2053"
+                            },
+                            "help": {
+                                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2053",
+                                "markdown": "Defect reference: [SC2053](https://github.com/koalaman/shellcheck/wiki/SC2053)"
+                            },
+                            "fullDescription": {
+                                "text": "Defect reference: https://github.com/koalaman/shellcheck/wiki/SC2053"
+                            }
+                        }
+                    ]' > .checkton.sarif.2
+          mv .checkton.sarif.2 .checkton.sarif
+
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@b56ba49b26e50535fa1e7f7db0f4f7b4bf65d80d # v3
         with:
