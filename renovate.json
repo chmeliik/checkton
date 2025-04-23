@@ -9,6 +9,19 @@
   ],
   "packageRules": [
     {
+      "packageRules": [
+        {
+          "matchUpdateTypes": [
+            "minor",
+            "patch",
+            "pin",
+            "digest"
+          ],
+          "automerge": true
+        }
+      ]
+    },
+    {
       "groupName": "GitHub Actions",
       "matchManagers": [
         "github-actions"
