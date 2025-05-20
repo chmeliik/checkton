@@ -26,11 +26,11 @@ inputs:
   pull-request-base:
     description: Hash of the latest commit in the base branch.
     required: false
-    default: ${{ github.event.pull_request.base.sha }}
+    default: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
   pull-request-head:
     description: Hash of the latest commit in the Pull Request.
     required: false
-    default: ${{ github.event.pull_request.head.sha }}
+    default: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
   fail-on-findings:
     description: >-
       Fail when ShellCheck reports some violations? (May wish to set this to false if you're
