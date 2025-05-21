@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+*Nothing yet.*
+
+## [v0.4.0] - 2025-05-21
+
 ### Added
 
 - You can now run Checkton on `merge_group` events as is
@@ -110,4 +114,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.2.2]: https://github.com/chmeliik/checkton/compare/v0.2.1...v0.2.2
 [v0.3.0]: https://github.com/chmeliik/checkton/compare/v0.2.2...v0.3.0
 [v0.3.1]: https://github.com/chmeliik/checkton/compare/v0.3.0...v0.3.1
-[unreleased]: https://github.com/chmeliik/checkton/compare/v0.3.1...HEAD
+[v0.4.0]: https://github.com/chmeliik/checkton/compare/v0.3.1...v0.4.0
+[unreleased]: https://github.com/chmeliik/checkton/compare/v0.4.0...HEAD
