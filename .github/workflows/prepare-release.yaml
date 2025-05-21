@@ -39,9 +39,9 @@ jobs:
             ${{ github.sha }}
             ${{ inputs.version }}
 
-      - name: Enable podman socket
-        run: |
-          systemctl --user start podman.socket
+      # - name: Enable podman socket
+      #   run: |
+      #     systemctl --user start podman.socket
 
       - name: Generate SBOM
         uses: anchore/sbom-action@e11c554f704a0b820cbf8c51673f6945e0731532 # v0
@@ -51,3 +51,4 @@ jobs:
           output-file: .sbom.json
           upload-artifact: false
           upload-release-assets: false
+          syft-version: v1.18.0
