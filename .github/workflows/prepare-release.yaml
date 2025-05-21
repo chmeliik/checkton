@@ -1,5 +1,7 @@
 name: Prepare Release
 on:
+  pull_request:
+    branches: [main]
   workflow_dispatch:
     inputs:
       version:
@@ -26,17 +28,6 @@ jobs:
       digest: ${{ steps.push.outputs.digest }}
 
     steps:
-      - name: Validate version input
-        run: |
-          #!/bin/bash
-          set -e
-
-          # allow arbitrary suffixes, e.g. v0.1.0-test when debugging the workflow itself
-          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-.*)?$ ]]; then
-              echo "Invalid version input (must match vx.y.z): $VERSION" >&2
-              exit 1
-          fi
-
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Build image
@@ -56,106 +47,3 @@ jobs:
           output-file: .sbom.json
           upload-artifact: false
           upload-release-assets: false
-
-      - name: Login to registry
-        uses: redhat-actions/podman-login@4934294ad0449894bcd1e9f191899d7292469603 # v1
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push image
-        id: push
-        uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2
-        with:
-          registry: ${{ env.REGISTRY }}
-          image: ${{ env.SCOPED_NAME }}
-          tags: |
-            ${{ github.sha }}
-            ${{ inputs.version }}
-
-      - name: Generate image attestation
-        uses: actions/attest-build-provenance@db473fddc028af60658334401dc6fa3ffd8669fd # v2
-        with:
-          subject-name: ${{ env.IMAGE }}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
-
-      - name: Generate SBOM attestation
-        uses: actions/attest-sbom@115c3be05ff3974bcbd596578934b3f9ce39bf68 # v2
-        with:
-          subject-name: ${{ env.IMAGE }}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          sbom-path: .sbom.json
-          push-to-registry: true
-
-  bump-image:
-    runs-on: ubuntu-latest
-    needs: [build]
-    permissions:
-      contents: write
-      pull-requests: write
-
-    env:
-      DIGEST: ${{ needs.build.outputs.digest }}
-
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          # differential-checkton tests require full commit history
-          fetch-depth: 0
-          submodules: true
-
-      - name: Test release image
-        run: |
-          make test-with-prebuilt-image IMAGE="${IMAGE}:${VERSION}@${DIGEST}"
-
-      - name: Auto-update files for release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          #!/bin/bash
-          set -e
-
-          prev_image=$(yq '.runs.image' action.yaml)
-          prev_image_without_digest=${prev_image%@*}
-          prev_version=${prev_image_without_digest##*:}  # extract tag
-          if [[ ! "$prev_version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-.*)?$ ]]; then
-              prev_version=""
-          fi
-          hack/update_changelog.py -r "$VERSION" -p "$prev_version" -R "$GITHUB_REPOSITORY"
-
-          image_with_digest=${IMAGE}:${VERSION}@${DIGEST}
-          sed -E "s;(\s*)image: .*;\1image: docker://$image_with_digest;" -i action.yaml
-
-          sed -E "s;uses: $GITHUB_REPOSITORY@.*;uses: $GITHUB_REPOSITORY@$VERSION;" -i README.md
-
-          if [[ -z "$(git diff)" ]]; then
-              echo "No changes applied. Is this version already released?" >&2
-              exit 1
-          fi
-
-          git config --global user.name "checkton-bot"
-          git config --global user.email "<checkton-bot@noreply.org>"
-
-          git checkout -b "selfupdate/$VERSION"
-
-          msg="Release $VERSION"
-
-          cat <<- EOF > /tmp/body.txt
-          * Update the action image to \`$image_with_digest\`
-          * Mark \`$VERSION\` as released in the CHANGELOG
-          * Update version tag in the usage example in the README
-
-          You may wish to verify that the image is legit:
-
-          \`\`\`
-          gh attestation verify --repo $GITHUB_REPOSITORY oci://$image_with_digest
-          \`\`\`
-          EOF
-
-          git add --update
-          git commit -m "$msg"
-
-          git push -f --set-upstream origin "selfupdate/$VERSION"
-          gh pr create --title "$msg" --body-file /tmp/body.txt
