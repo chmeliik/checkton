@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing yet.*
+### Added
+
+- You can now run Checkton on `merge_group` events as is
+  - Previously, you would need to adjust the value of the `pull-request-base`
+    parameter when running in a merge group
 
 ## [v0.3.1] - 2024-11-20
 
