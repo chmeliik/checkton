@@ -29,7 +29,7 @@ jobs:
           fail-on-findings: false
 
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@5d5cd550d3e189c569da8f16ea8de2d821c9bf7a # v3
+        uses: github/codeql-action/upload-sarif@f94c9befffa4412c356fb5463a959ab7821dd57e # v3
         with:
           sarif_file: ${{ steps.checkton.outputs.sarif }}
           # Avoid clashing with ShellCheck
