@@ -37,7 +37,7 @@ jobs:
               exit 1
           fi
 
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Build image
         uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
@@ -53,7 +53,7 @@ jobs:
           systemctl --user start podman.socket
 
       - name: Generate SBOM
-        uses: anchore/sbom-action@8e94d75ddd33f69f691467e42275782e4bfefe84 # v0
+        uses: anchore/sbom-action@fbfd9c6c189226748411491745178e0c2017392d # v0
         with:
           image: ${{ env.IMAGE }}:${{ github.sha }}
           format: cyclonedx-json
@@ -104,7 +104,7 @@ jobs:
       DIGEST: ${{ needs.build.outputs.digest }}
 
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           # differential-checkton tests require full commit history
           fetch-depth: 0
