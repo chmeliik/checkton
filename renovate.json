@@ -29,7 +29,7 @@
     }
   ],
   "schedule": [
-    "before 4:00am on Monday"
+    "* * 1 * *"
   ],
   "git-submodules": {
     "enabled": true
